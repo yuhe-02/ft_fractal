@@ -1,12 +1,13 @@
 NAME=sample
 CFLAGS=-Wall -Wextra -Werror
-SRCS=src/main.c
+# SRCS=src/main.c
+SRCS=src/mandel.c
 OBJS=$(SRCS:.c=.o)
 
 # minilibx
 MINILIBX_URL := https://cdn.intra.42.fr/document/document/23420/minilibx_opengl.tgz
 MINILIBX_TAR_GZ := minilibx_opengl.tgz
-MINILIBX_DIR := ./minilibx_opengl_20191021
+MINILIBX_DIR := ./minilibx-linux
 MINILIBX := $(MINILIBX_DIR)/libmlx.a
 
 INCLUDES := -I$(MINILIBX_DIR)

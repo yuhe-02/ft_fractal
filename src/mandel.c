@@ -43,17 +43,18 @@ int key_hook(int keycode, t_data *data) {
     return (0);
 }
 
-void draw_julia_set(t_data *img) {
+void draw_mandelbrot_set(t_data *img) {
 
 	// C の実部と虚部
-	double	cx = -0.3;
-	double	cy = -0.63;
+
 
     // フラクタルの描画処理
     for (int y = 0; y < HEIGHT; y++) {
         for (int x = 0; x < WIDTH; x++) {
-            double zx = (x - (WIDTH / 2)) / (0.5 * img->zoom * WIDTH) + img->offsetX;
-            double zy = (y - (HEIGHT / 2)) / (0.5 * img->zoom *HEIGHT) + img->offsetY;
+            double	zx = 0;
+	        double	zy = 0;
+            double cx = (x - (WIDTH / 2)) / (0.5 * img->zoom * WIDTH) + img->offsetX;
+            double cy = (y - (HEIGHT / 2)) / (0.5 * img->zoom *HEIGHT) + img->offsetY;
             int i = 0;
             while (zx * zx + zy * zy < 4 && i < ACRAC) {
                 double tmp = zx * zx - zy * zy + cx;
@@ -79,14 +80,14 @@ int mouse_hook(int button, int x, int y, void *param) {
         img->zoom /= 1.2;
     }
     mlx_clear_window(img->mlx, img->win);
-    draw_julia_set(img);
+    draw_mandelbrot_set(img);
     return 0;
 }
 
 int	main(void)
 {    // MiniLibX の初期化
     void	*mlx = mlx_init();
-    void	*win = mlx_new_window(mlx, WIDTH, HEIGHT, "Julia Set");
+    void	*win = mlx_new_window(mlx, WIDTH, HEIGHT, "Mandelbrot Set");
     t_data	img;
 
     img.mlx = mlx;
@@ -97,7 +98,7 @@ int	main(void)
     img.offsetX = 0.0;
     img.offsetY = 0.0;
 
-	draw_julia_set(&img);
+	draw_mandelbrot_set(&img);
 
     mlx_hook(img.win, 17, 0, close_window, &img);
     mlx_key_hook(img.win, key_hook, &img);
