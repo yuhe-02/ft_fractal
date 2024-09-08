@@ -1,7 +1,7 @@
 NAME=sample
 CFLAGS=-Wall -Wextra -Werror
-# SRCS=src/main.c
-SRCS=src/mandel.c
+SRCS=src/main.c
+# SRCS=src/mandel.c
 OBJS=$(SRCS:.c=.o)
 
 # minilibx
@@ -10,7 +10,7 @@ MINILIBX_TAR_GZ := minilibx_opengl.tgz
 MINILIBX_DIR := ./minilibx-linux
 MINILIBX := $(MINILIBX_DIR)/libmlx.a
 
-INCLUDES := -I$(MINILIBX_DIR)
+INCLUDES := -I$(MINILIBX_DIR) -Isrc/includes
 LDFLAGS := -L$(MINILIBX_DIR)
 LIBS=-lm -lmlx
 
@@ -44,4 +44,3 @@ fclean: clean
 
 .PHONY: re
 re: fclean all
-
