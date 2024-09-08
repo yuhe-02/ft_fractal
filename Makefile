@@ -1,7 +1,6 @@
-NAME=sample
+NAME=ft_fractal
 CFLAGS=-Wall -Wextra -Werror
-SRCS=src/main.c
-# SRCS=src/mandel.c
+SRCS=src/main.c src/choose_fractal.c src/ft_julia.c src/ft_mandel.c
 OBJS=$(SRCS:.c=.o)
 
 # minilibx
@@ -14,14 +13,13 @@ INCLUDES := -I$(MINILIBX_DIR) -Isrc/includes
 LDFLAGS := -L$(MINILIBX_DIR)
 LIBS=-lm -lmlx
 
-.PHONY: all
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) minilibx-linux/libmlx_Linux.a -lX11 -lXext -o $(NAME)
 
 %.o: %.c
-#	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	# $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	$(CC) $(INCLUDES) -c $< -o $@
 
 $(MINILIBX_TAR_GZ):
@@ -31,16 +29,15 @@ $(MINILIBX): $(MINILIBX_TAR_GZ)
 	tar xvzf $(MINILIBX_TAR_GZ)
 	$(MAKE) -j4 -C $(MINILIBX_DIR)
 
-.PHONY: clean
 clean:
 	$(RM) $(OBJS)
 	$(MAKE) -C $(MINILIBX_DIR) clean
 
-.PHONY: fclean
 fclean: clean
 	$(RM) $(NAME)
 	$(RM) -r $(MINILIBX_DIR)
 	$(RM) $(MINILIBX_TAR_GZ)
 
-.PHONY: re
 re: fclean all
+
+.PHONY: all clean fclean re
