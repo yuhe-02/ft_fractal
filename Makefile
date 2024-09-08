@@ -1,6 +1,9 @@
 NAME=ft_fractal
 CFLAGS=-Wall -Wextra -Werror
-SRCS=src/main.c src/choose_fractal.c src/ft_julia.c src/ft_mandel.c
+
+DRAWER= src/draw_fractal/ft_julia.c src/draw_fractal/ft_mandel.c
+SRCS=src/main.c src/choose_fractal.c
+SRCS+=$(DRAWER)
 OBJS=$(SRCS:.c=.o)
 
 # minilibx
@@ -8,15 +11,16 @@ MINILIBX_URL := https://cdn.intra.42.fr/document/document/23420/minilibx_opengl.
 MINILIBX_TAR_GZ := minilibx_opengl.tgz
 MINILIBX_DIR := ./minilibx-linux
 MINILIBX := $(MINILIBX_DIR)/libmlx.a
+MINILIBX_LINUX := $(MINILIBX_DIR)/libmlx_Linux.a
 
 INCLUDES := -I$(MINILIBX_DIR) -Isrc/includes
 LDFLAGS := -L$(MINILIBX_DIR)
-LIBS=-lm -lmlx
+LIBS=-lm -lmlx -lX11 -lXext
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) minilibx-linux/libmlx_Linux.a -lX11 -lXext -o $(NAME)
+	$(CC) $(OBJS) $(MINILIBX_LINUX) $(LIBS)  -o $(NAME)
 
 %.o: %.c
 	# $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
