@@ -28,19 +28,33 @@ typedef struct	s_data {
     double offsetX;
     double offsetY;
     int     set_type;
+    int     param1;
+    int     param2;
 }				t_data;
+
+typedef struct	s_coord {
+    double cx;
+    double cy;
+    double zx;
+    double zy;
+}				t_coord;
 
 #define WIDTH 400
 #define HEIGHT 400
 #define ACRAC 1000
 
-void init_images(t_data *img, int argc);
-int key_hook(int keycode, void *param);
-int mouse_hook(int button, int x, int y, void *param);
-void choose_fractal(t_data *img);
-void draw_mandelbrot_set(t_data *img);
-void draw_julia_set(t_data *img);
-int close_window(t_data *data);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void    init_images(t_data *img, int argc);
+int     key_hook(int keycode, void *param);
+int     mouse_hook(int button, int x, int y, void *param);
+void    choose_fractal(t_data *img);
+t_coord*     calc_mandelbrot_set(t_data *img, int x, int y);
+t_coord*     calc_julia_set(t_data *img, int x, int y);
+int     close_window(t_data *data);
+void	put_mlx_pixel(t_data *data, int x, int y, int color);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+double ft_atob(const char *str);
+char	*ft_strchr(const char *s, int c);
+int	ft_strlen(char *str);
+char	*ft_strrchr(const char *s, int c);
 
 #endif

@@ -1,6 +1,6 @@
 #include "ft_fractal.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	put_mlx_pixel(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -8,54 +8,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int close_window(t_data *data) 
-{
-    mlx_destroy_image(data->mlx, data->img);
-    mlx_destroy_window(data->mlx, data->win);
-    exit(0);
-}
-
-int mouse_hook(int button, int x, int y, void *param) 
-{
-    t_data *img = (t_data *)param;
-    if (button == 4) { // マウスホイールアップ（ズームイン）
-        img->zoom *= 1.2;
-    } else if (button == 5) { // マウスホイールダウン（ズームアウト）
-        img->zoom /= 1.2;
-    }
-    mlx_clear_window(img->mlx, img->win);
-    choose_fractal(img);
-    return 0;
-}
-
-int key_hook(int keycode, void *param) 
-{
-    t_data *img = (t_data *)param;
-    double move_step = 0.05 / img->zoom; // ズームに応じて移動量を調整
-
-    if (keycode == KEY_ESC) { // ESCキーを押したとき（プログラム終了）
-        mlx_destroy_window(img->mlx, img->win);
-        exit(0);
-    }
-    else if (keycode == KEY_LEFT) { // 左矢印キー
-        img->offsetX -= move_step;
-    }
-    else if (keycode == KEY_RIGHT) { // 右矢印キー
-        img->offsetX += move_step;
-    }
-    else if (keycode == KEY_UP) { // 上矢印キー
-        img->offsetY -= move_step;
-    }
-    else if (keycode == KEY_DOWN) { // 下矢印キー
-        img->offsetY += move_step;
-    }
-
-    mlx_clear_window(img->mlx, img->win);
-    choose_fractal(img);
-    return 0;
-}
-
-void init_images(t_data *img, int argc) 
+void init_images(t_data *img, int argc, char **argv) 
 {
     img->mlx = mlx_init();
     img->win = mlx_new_window(img->mlx, WIDTH, HEIGHT, "Some Set");
@@ -64,21 +17,34 @@ void init_images(t_data *img, int argc)
     img->zoom = 1.0;
     img->offsetX = 0.0;
     img->offsetY = 0.0;
-    if (argc % 2 == 1)
+    if (ft_strncmp(argv[1], "julia", 6) == 0)
         img->set_type = 0;
-    else
+    else if (ft_strncmp(argv[1], "mandelbrot", 11) == 0)
         img->set_type = 1;
-} 
+    else 
+        exit(1);
+    if (!ft_is_valid_num(argv[2]) || !ft_is_valid_num(argv[3]))
+        exit(1);
+    img->param1 = ft_atob(argv[2]);
+    img->param2 = ft_atob(argv[2]);
+}
+
+static void    set_hooks(t_data *img)
+{
+    mlx_hook(img->win, 17, 0, close_window, img);
+    mlx_key_hook(img->win, key_hook, img);
+    mlx_mouse_hook(img->win, mouse_hook, img);
+}
 
 int	main(int argc, char **argv)
 {
     t_data	img;
 
+    if (argc != 4)
+        exit(1);
     init_images(&img, argc);
     choose_fractal(&img);
-    mlx_hook(img.win, 17, 0, close_window, &img);
-    mlx_key_hook(img.win, key_hook, &img);
-    mlx_mouse_hook(img.win, mouse_hook, &img);
+    set_hooks(&img);
     mlx_loop(img.mlx);
     return (0);
 }

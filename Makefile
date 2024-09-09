@@ -2,8 +2,11 @@ NAME=ft_fractal
 CFLAGS=-Wall -Wextra -Werror
 
 DRAWER= src/draw_fractal/ft_julia.c src/draw_fractal/ft_mandel.c
-SRCS=src/main.c src/choose_fractal.c
+UTILS=	utils/ft_strncmp.c utils/ft_atob.c utils/ft_is_valid_num.c \
+		utils/ft_strlen.c utils/ft_strrchr.c utils/ft_strchr.c
+SRCS=src/main.c src/choose_fractal.c src/hooks.c
 SRCS+=$(DRAWER)
+SRCS+=$(UTILS)
 OBJS=$(SRCS:.c=.o)
 
 # minilibx
