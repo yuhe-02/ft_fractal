@@ -1,5 +1,6 @@
 NAME=ft_fractal
 CFLAGS=-Wall -Wextra -Werror
+CC = cc
 
 DRAWER= src/draw_fractal/ft_julia.c src/draw_fractal/ft_mandel.c
 UTILS=	utils/ft_strncmp.c utils/ft_atob.c utils/ft_is_valid_num.c \

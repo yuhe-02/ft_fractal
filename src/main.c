@@ -26,7 +26,7 @@ void init_images(t_data *img, int argc, char **argv)
     if (!ft_is_valid_num(argv[2]) || !ft_is_valid_num(argv[3]))
         exit(1);
     img->param1 = ft_atob(argv[2]);
-    img->param2 = ft_atob(argv[2]);
+    img->param2 = ft_atob(argv[3]);
 }
 
 static void    set_hooks(t_data *img)

@@ -1,46 +1,51 @@
-double ascii_to_double(const char *str) 
+#include "ft_fractal.h"
+
+static double convert_int(const char *str, int len)
 {
-    double result = 0.0;
-    double fraction = 0.0;
-    double divisor = 10.0;
-    int is_negative = 0;
-    int is_fraction = 0;
+    double  ans;
+    int     i;
 
-    // 先頭に符号があるか確認
-    if (*str == '-') {
-        is_negative = 1;
-        str++;
-    } 
-    // 文字列を解析して整数部分を取得
-    while (*str != '\0') {
-        if (*str == '.') {
-            is_fraction = 1;
-            str++;
-            continue;
-        }
-
-        if (*str >= '0' && *str <= '9') {
-            if (is_fraction) {
-                // 小数点以下の部分の処理
-                fraction += (*str - '0') / divisor;
-                divisor *= 10.0;
-            } else {
-                // 整数部分の処理
-                result = result * 10.0 + (*str - '0');
-            }
-        } else {
-            // 無効な文字があった場合には停止
-            break;
-        }
-        str++;
+    i = 0;
+    ans = 0;
+    while (i < len)
+    {
+        ans = ans * 10 + (double)(str[i] - '0');
+        i++;
     }
+    return (ans); 
+}
 
-    // 負数の場合は符号を反転
-    if (is_negative) {
-        result = -(result + fraction);
-    } else {
-        result += fraction;
+static double convert_fraction(const char *str)
+{
+    double  ans;
+    int     len;
+
+    len = ft_strlen((char *)str);
+    ans = 0;
+    while (len)
+    {
+        ans = ans / 10 + (double)(str[len - 1] - '0'); 
+        len--;
     }
+    return (ans / 10);
+}
 
-    return result;
+double ft_atob(const char *str) 
+{
+    double  ans;
+    char    *dot_pos;
+    char    *str2;
+    int     minus_flg;
+
+    str2 = ft_delete_space(str);
+    minus_flg = FT_FALSE;
+    if (*str2 == '-')
+        minus_flg = FT_TRUE;
+    dot_pos = ft_strchr(str2, '.');
+    ans = convert_int(str2 + minus_flg, dot_pos - str2 - minus_flg);
+    ans += convert_fraction(dot_pos + 1);
+    free(str2);
+    if (minus_flg)
+        ans = -ans;
+    return (ans);
 }

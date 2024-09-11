@@ -6,11 +6,11 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 15:59:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/09 14:06:57 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:59:19 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_fractal.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
