@@ -42,8 +42,14 @@ double ft_atob(const char *str)
     if (*str2 == '-')
         minus_flg = FT_TRUE;
     dot_pos = ft_strchr(str2, '.');
-    ans = convert_int(str2 + minus_flg, dot_pos - str2 - minus_flg);
-    ans += convert_fraction(dot_pos + 1);
+    if (!dot_pos || !*dot_pos){
+        ans = convert_int(str2 + minus_flg, ft_strlen(str2 + minus_flg));
+    }
+    else
+    {
+        ans = convert_int(str2 + minus_flg, dot_pos - str2 - minus_flg);
+        ans += convert_fraction(dot_pos + 1);
+    }
     free(str2);
     if (minus_flg)
         ans = -ans;

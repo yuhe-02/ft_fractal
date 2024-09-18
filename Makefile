@@ -2,12 +2,18 @@ NAME=ft_fractal
 CFLAGS=-Wall -Wextra -Werror
 CC = cc
 
-DRAWER= src/draw_fractal/ft_julia.c src/draw_fractal/ft_mandel.c
-UTILS=	utils/ft_strncmp.c utils/ft_atob.c utils/ft_is_valid_num.c \
-		utils/ft_strlen.c utils/ft_strrchr.c utils/ft_strchr.c
+COLORS= src/calc_colors/calc_color1.c src/calc_colors/calc_color2.c
+DRAWER= src/draw_fractal/ft_julia.c src/draw_fractal/ft_mandel.c src/draw_fractal/ft_newton5.c
+BONUS= src/bonus/ft_sample.c
+UTILS=	src/utils/ft_strncmp.c src/utils/ft_atob.c src/utils/ft_is_valid_num.c \
+		src/utils/ft_strlen.c src/utils/ft_strrchr.c src/utils/ft_strchr.c \
+		src/utils/ft_substr.c src/utils/ft_delete_space.c src/utils/ft_is_num.c \
+		src/utils/ft_strlcpy.c src/utils/ft_isspace.c src/utils/ft_memset.c
 SRCS=src/main.c src/choose_fractal.c src/hooks.c
+SRCS+=$(COLORS)
 SRCS+=$(DRAWER)
 SRCS+=$(UTILS)
+SRCS+=$(BONUS)
 OBJS=$(SRCS:.c=.o)
 
 # minilibx
@@ -39,12 +45,12 @@ $(MINILIBX): $(MINILIBX_TAR_GZ)
 
 clean:
 	$(RM) $(OBJS)
-	$(MAKE) -C $(MINILIBX_DIR) clean
+	# $(MAKE) -C $(MINILIBX_DIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
-	$(RM) -r $(MINILIBX_DIR)
-	$(RM) $(MINILIBX_TAR_GZ)
+	# $(RM) -r $(MINILIBX_DIR)
+	# $(RM) $(MINILIBX_TAR_GZ)
 
 re: fclean all
 
