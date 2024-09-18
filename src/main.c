@@ -21,12 +21,28 @@ void init_images(t_data *img, int argc, char **argv)
         img->set_type = 0;
     else if (ft_strncmp(argv[1], "mandelbrot", 11) == 0)
         img->set_type = 1;
-    else 
+    else if (ft_strncmp(argv[1], "bonus", 6) == 0)
+        img->set_type = 2;
+    else
         exit(1);
-    if (!ft_is_valid_num(argv[2]) || !ft_is_valid_num(argv[3]))
-        exit(1);
+    if (img->set_type == 2)
+    {
+        if (argc != 6)
+            exit(1);
+        if (!ft_is_valid_num(argv[2]) || !ft_is_valid_num(argv[3]) || !ft_is_valid_num(argv[4]) || !ft_is_valid_num(argv[5]))
+            exit(1);
+        img->param3 = ft_atob(argv[4]);
+        img->param4 = ft_atob(argv[5]);
+    } else {
+        if (argc != 4)
+            exit(1);
+        if (!ft_is_valid_num(argv[2]) || !ft_is_valid_num(argv[3]))
+            exit(1);
+    }
     img->param1 = ft_atob(argv[2]);
     img->param2 = ft_atob(argv[3]);
+    img->color_flg = 1;
+    printf("x,y: %f,%f\n", img->param1, img->param2);
 }
 
 static void    set_hooks(t_data *img)
@@ -40,9 +56,9 @@ int	main(int argc, char **argv)
 {
     t_data	img;
 
-    if (argc != 4)
+    if (argc <= 1)
         exit(1);
-    init_images(&img, argc);
+    init_images(&img, argc, argv);
     choose_fractal(&img);
     set_hooks(&img);
     mlx_loop(img.mlx);

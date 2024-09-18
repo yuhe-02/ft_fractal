@@ -1,25 +1,6 @@
 #include "ft_fractal.h"
-static int calc_color(t_coord *cd)
-{
-	int		i;
-	int		color;
-	double	tmp;
 
-	i = 0;
-	while (cd->zx * cd->zx + cd->zy * cd->zy < 4 && i < ACRAC)
-    {
-        tmp = cd->zx * cd->zx - cd->zy * cd->zy + cd->cx;
-        cd->zy = 2.0 * cd->zx * cd->zy + cd->cy;
-        cd->zx = tmp;
-        i++;
-    }
-    if (i == ACRAC)
-        i = 0;
-	color = i * 10000;
-	return (color);
-}
-
-static void draw_fractal(t_data *img, t_coord *(*func)(t_data *, int, int))
+static void draw_fractal(t_data *img, fractal_func func, calc_color cal_color)
 {
 	int	x;
 	int	y;
@@ -33,7 +14,7 @@ static void draw_fractal(t_data *img, t_coord *(*func)(t_data *, int, int))
         while (x < WIDTH)
         {
 			cd = func(img, x, y);
-			color = calc_color(cd);
+			color = cal_color(cd, img->color_flg);
 			free(cd);
             put_mlx_pixel(img, x, y, color);
             x++;
@@ -45,14 +26,18 @@ static void draw_fractal(t_data *img, t_coord *(*func)(t_data *, int, int))
 
 void choose_fractal(t_data *img) 
 {
-	t_coord *(*func)(t_data *, int, int);
+    fractal_func func;
+    calc_color cal_color;
 
-    if (img->set_type == 0) {
+    cal_color = calc_color1;
+    if (img->set_type == 0)
         func = calc_julia_set;
-    } else if (img->set_type == 1) {
+    else if (img->set_type == 1)
         func = calc_mandelbrot_set;
-    } else {
-        func = calc_julia_set;
+    else 
+    {
+        func = calc_newton5_set;
+        cal_color = calc_color2;
     }
-	draw_fractal(img, func);
+	draw_fractal(img, func, cal_color);
 }
