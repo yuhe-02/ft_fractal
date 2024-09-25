@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_delete_space.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 00:12:30 by yyamasak          #+#    #+#             */
+/*   Updated: 2024/09/26 00:12:57 by yyamasak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_fractal.h"
 
-char *ft_delete_space(const char *str)
+char	*ft_delete_space(const char *str)
 {
-	int	i;
-	int	start;
-	char *str2;
+	int		i;
+	int		start;
+	char	*str2;
 
 	i = 0;
 	while (ft_isspace(str[i]))
