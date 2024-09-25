@@ -28,6 +28,17 @@ typedef enum e_mouses {
     MOUSE_WHEEL_DOWN = 5
 } t_mouses;
 
+typedef enum e_shapes {
+    JULIA = 0,
+    MANDELBROT = 1,
+    BONUS = 2
+} t_shapes;
+
+#define JULIA_S "julia"
+#define MANDELBROT_S "mandelbrot"
+#define BONUS_S "bonus"
+
+
 typedef struct	s_data {
     void    *mlx;
     void    *win;
@@ -52,8 +63,7 @@ typedef struct	s_coord {
     double cy;
     double zx;
     double zy;
-    double complex root; 
-    double angle;
+    int    iterations;
 }				t_coord;
 
 typedef struct s_range {
@@ -76,7 +86,7 @@ typedef int     (*calc_color)(t_coord *, int);
 #define MOVE_MAG 0.05
 #define FRACTAL_RANGE 2.0
 #define DEPTH 20
-#define MAX_ITER 100
+#define MAX_ITER 300
 #define EPS 1e-10
 
 void        init_images(t_data *img, int argc, char **argv);
@@ -98,11 +108,10 @@ char        *ft_substr(char const *s, unsigned int start, size_t len);
 size_t      ft_strlcpy(char *dest, char const *src, size_t n);
 char        *ft_delete_space(const char *str);
 int         ft_is_valid_num(const char *str);
-// void        draw_dragon_curve(t_data *img);
-// void        draw_fractal_re(t_data *img, t_coord *(*func)(t_data *, int, int));
 void	    *ft_memset(void *s, int c, size_t n);
 t_coord     *calc_newton5_set(t_data *img, int x, int y);
 int         calc_color2(t_coord *cd, int color_flg);
 int         calc_color1(t_coord *cd, int color_flg);
+void set_error(char *message);
 
 #endif

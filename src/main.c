@@ -8,40 +8,47 @@ void	put_mlx_pixel(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+static void validate_params(char **argv, int param_num, int start_index)
+{
+    while (start_index < param_num)
+    {
+        if (!(ft_is_valid_num(argv[start_index])))
+            set_error("invalid parameter");
+        start_index++;
+    }
+}
+
+static int set_shape_param(t_data *img, int argc, char **argv)
+{
+    int param_num;
+
+    if (ft_strncmp(argv[1], JULIA_S, ft_strlen(JULIA_S) + 1) == 0)
+        img->set_type = JULIA;
+    else if (ft_strncmp(argv[1], MANDELBROT_S, ft_strlen(MANDELBROT_S) + 1) == 0)
+        img->set_type = MANDELBROT;
+    else if (ft_strncmp(argv[1], BONUS_S, ft_strlen(BONUS_S) + 1) == 0)
+        img->set_type = BONUS;
+    else
+        set_error("cannot find shape name");
+    param_num = 4;
+    if (argc != param_num)
+        set_error("the number of parameter is invalid");
+    validate_params(argv, param_num, 2);
+    img->param1 = ft_atob(argv[2]);
+    img->param2 = ft_atob(argv[3]);
+}
+
 void init_images(t_data *img, int argc, char **argv) 
 {
+    set_shape_param(img, argc, argv);
+    img->color_flg = 1;
     img->mlx = mlx_init();
-    img->win = mlx_new_window(img->mlx, WIDTH, HEIGHT, "Some Set");
+    img->win = mlx_new_window(img->mlx, WIDTH, HEIGHT, argv[1]);
     img->img = mlx_new_image(img->mlx, WIDTH, HEIGHT);
     img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
     img->zoom = 1.0;
     img->offsetX = 0.0;
     img->offsetY = 0.0;
-    if (ft_strncmp(argv[1], "julia", 6) == 0)
-        img->set_type = 0;
-    else if (ft_strncmp(argv[1], "mandelbrot", 11) == 0)
-        img->set_type = 1;
-    else if (ft_strncmp(argv[1], "bonus", 6) == 0)
-        img->set_type = 2;
-    else
-        exit(1);
-    if (img->set_type == 2)
-    {
-        if (argc != 6)
-            exit(1);
-        if (!ft_is_valid_num(argv[2]) || !ft_is_valid_num(argv[3]) || !ft_is_valid_num(argv[4]) || !ft_is_valid_num(argv[5]))
-            exit(1);
-        img->param3 = ft_atob(argv[4]);
-        img->param4 = ft_atob(argv[5]);
-    } else {
-        if (argc != 4)
-            exit(1);
-        if (!ft_is_valid_num(argv[2]) || !ft_is_valid_num(argv[3]))
-            exit(1);
-    }
-    img->param1 = ft_atob(argv[2]);
-    img->param2 = ft_atob(argv[3]);
-    img->color_flg = 1;
     printf("x,y: %f,%f\n", img->param1, img->param2);
 }
 
