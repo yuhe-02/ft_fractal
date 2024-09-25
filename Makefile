@@ -7,7 +7,7 @@ DRAWER= src/draw_fractal/ft_julia.c src/draw_fractal/ft_mandel.c src/draw_fracta
 UTILS=	src/utils/ft_strncmp.c src/utils/ft_atob.c src/utils/ft_is_valid_num.c \
 		src/utils/ft_strlen.c src/utils/ft_strrchr.c src/utils/ft_strchr.c \
 		src/utils/ft_substr.c src/utils/ft_delete_space.c src/utils/ft_is_num.c \
-		src/utils/ft_strlcpy.c src/utils/ft_isspace.c src/utils/ft_memset.c \
+		src/utils/ft_strlcpy.c src/utils/ft_isspace.c \
 		src/set_error.c src/utils/ft_put_pixel.c
 SRCS=src/choose_fractal.c src/hooks.c
 MAIN=src/sample.c src/main.c 
