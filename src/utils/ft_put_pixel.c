@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_put_pixel.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 00:10:20 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/26 00:10:25 by yyamasak         ###   ########.fr       */
+/*   Created: 2024/09/25 23:30:42 by yyamasak          #+#    #+#             */
+/*   Updated: 2024/09/26 00:11:43 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fractal.h"
 
-size_t	ft_strlcpy(char *dest, char const *src, size_t n)
+void	put_mlx_pixel(t_data *data, int x, int y, int color)
 {
-	size_t	i;
-	size_t	j;
+	char	*dst;
 
-	i = 0;
-	j = 0;
-	while (*(src + i))
-		i++;
-	if (!n)
-		return (i);
-	while (j < n - 1 && src[j])
-	{
-		dest[j] = src[j];
-		j++;
-	}
-	dest[j] = '\0';
-	return (i);
+	dst = data->addr + (y * data->llen + x * (data->bpp / 8));
+	*(unsigned int *)dst = color;
 }

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_is_valid_num.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 00:05:17 by yyamasak          #+#    #+#             */
+/*   Updated: 2024/09/26 00:08:13 by yyamasak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_fractal.h"
 
-static int check_decimal(const char *str, int minus_flg)
+static int	check_decimal(const char *str, int minus_flg)
 {
-	int i;
-	int num_flg;
+	int	i;
+	int	num_flg;
 
 	i = 0;
 	num_flg = FT_FALSE;
@@ -20,7 +32,7 @@ static int check_decimal(const char *str, int minus_flg)
 	return (FT_TRUE);
 }
 
-static int ft_check_validity(int c, int stil_flg, int *num_flg, int minus_flg)
+static int	ft_check_validity(int c, int stil_flg, int *num_flg, int minus_flg)
 {
 	if (c != '0')
 		*num_flg = FT_TRUE;
@@ -30,31 +42,31 @@ static int ft_check_validity(int c, int stil_flg, int *num_flg, int minus_flg)
 		return (FT_FALSE);
 	return (FT_TRUE);
 }
-static int check_integer(const char *str, int len)
+
+static int	check_integer(const char *str, int len)
 {
-	int num_flg;
+	int	nf;
 	int	i;
-	int minus_flg;
-	
-	num_flg = 0;
-	minus_flg = 0;
+	int	mf;
+
+	nf = 0;
+	mf = 0;
 	i = 0;
 	if (str[i] == '-')
-		minus_flg = 1;
-	while (i + minus_flg < len)
+		mf = 1;
+	while (i + mf < len)
 	{
-		if (ft_is_num(str[i + minus_flg]))
+		if (ft_is_num(str[i + mf]))
 		{
-			if (!ft_check_validity(str[i + minus_flg], len - i - minus_flg - 1 , &num_flg, minus_flg))
+			if (!ft_check_validity(str[i + mf], len - i - mf - 1, &nf, mf))
 				return (FT_FALSE);
-		} 
+		}
 		else
 			return (FT_FALSE);
 		i++;
 	}
 	return (FT_TRUE);
 }
-
 
 int	ft_is_valid_num(const char *str)
 {
@@ -90,7 +102,6 @@ int	ft_is_valid_num(const char *str)
 // 	if (ans != expected)
 // 		res = "KO";
 // 	printf("test case: %s result: %s ans: %d\n", str, res, ans);
-		
 // }
 
 // #include <stdio.h>
