@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/26 00:12:01 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/09/29 08:14:31 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ typedef enum e_shapes
 # define DEPTH 20
 # define MAX_ITER 300
 # define EPS 1e-10
+# define WINDOW_CLOSE 17
+# define SENTENCE1 "Below is sample valid parameters.\n"
+# define SENTENCE2 "./ft_fractal julia -0.3 -0.63\n"
+# define SENTENCE3 "./ft_fractal mandelbrot 0 0\n"
+# define SENTENCE4 "./ft_fractal bonus 3 -2\n"
 
 typedef struct s_data
 {
@@ -116,7 +121,7 @@ int			ft_is_valid_num(const char *str);
 t_coord		*calc_newton5_set(t_data *img, int x, int y);
 int			calc_color2(t_coord *cd, int color_flg);
 int			calc_color1(t_coord *cd, int color_flg);
-void		set_error(char *message);
+void		set_error(char *message, int is_put_sample, int exit_no);
 void		put_mlx_pixel(t_data *data, int x, int y, int color);
 
 #endif

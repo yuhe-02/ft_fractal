@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:36:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/25 23:54:17 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/09/29 08:38:11 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	mouse_hook(int button, int x, int y, void *param)
 		img->zoom /= ZOOM_MAG;
 	else if (button == MOUSE_LEFT_CLICK)
 		change_centered(img, x, y);
+	else
+		return (0);
 	mlx_clear_window(img->mlx, img->win);
 	choose_fractal(img);
 	return (0);
@@ -65,6 +67,8 @@ int	key_hook(int keycode, void *param)
 		img->color_flg = 10;
 	else if (keycode == KEY_B)
 		img->color_flg = 1;
+	else
+		return (0);
 	mlx_clear_window(img->mlx, img->win);
 	choose_fractal(img);
 	return (0);
