@@ -6,13 +6,13 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 07:02:06 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/29 07:11:11 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:13:55 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isspace(int c)
 {
-	char 	*str;
+	char	*str;
 	int		i;
 
 	str = " \t\n\r\v\f";
