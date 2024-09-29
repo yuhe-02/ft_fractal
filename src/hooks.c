@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:36:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/29 08:38:11 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/09/29 08:53:39 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,18 @@ int	mouse_hook(int button, int x, int y, void *param)
 int	key_hook(int keycode, void *param)
 {
 	t_data	*img;
-	double	move_step;
 
 	img = (t_data *)param;
-	move_step = MOVE_MAG / img->zoom;
 	if (keycode == KEY_ESC)
-	{
-		mlx_destroy_window(img->mlx, img->win);
-		exit(0);
-	}
+		close_window(img->mlx);
 	else if (keycode == KEY_LEFT)
-		img->offset_x -= move_step;
+		img->offset_x -= (double)MOVE_MAG / img->zoom;
 	else if (keycode == KEY_RIGHT)
-		img->offset_x += move_step;
+		img->offset_x += (double)MOVE_MAG / img->zoom;
 	else if (keycode == KEY_UP)
-		img->offset_y -= move_step;
+		img->offset_y -= (double)MOVE_MAG / img->zoom;
 	else if (keycode == KEY_DOWN)
-		img->offset_y += move_step;
+		img->offset_y += (double)MOVE_MAG / img->zoom;
 	else if (keycode == KEY_C)
 		img->color_flg = 10;
 	else if (keycode == KEY_B)
