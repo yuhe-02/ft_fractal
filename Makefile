@@ -51,9 +51,12 @@ $(MINILIBX): $(MINILIBX_TAR_GZ)
 clean:
 	$(RM) $(OBJS)
 	# $(MAKE) -C $(MINILIBX_DIR) clean
+	# $(MAKE) -C $(MINILIBX_DIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
+	# $(RM) -r $(MINILIBX_DIR)
+	# $(RM) $(MINILIBX_TAR_GZ)
 	# $(RM) -r $(MINILIBX_DIR)
 	# $(RM) $(MINILIBX_TAR_GZ)
 

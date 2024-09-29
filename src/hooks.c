@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:36:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/29 09:25:03 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:03:24 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,28 @@ int	close_window(t_data *data)
 	exit(0);
 }
 
+static void	change_centered(t_data *i, int x, int y)
+{
+	i->offset_x = (x - WIDTH / 2.0) * (F_RAN / WIDTH) / i->zoom + i->offset_x;
+	i->offset_y = (y - HEIGHT / 2.0) * (F_RAN / HEIGHT) / i->zoom + i->offset_y;
+}
+
+int	mouse_hook(int button, int x, int y, void *param)
+{
+	t_data	*img;
+
+	img = (t_data *)param;
+	if (button == MOUSE_WHEEL_UP)
+		img->zoom *= ZOOM_MAG;
+	else if (button == MOUSE_WHEEL_DOWN)
+		img->zoom /= ZOOM_MAG;
+	else if (button == MOUSE_LEFT_CLICK)
+		change_centered(img, x, y);
+	else
+		return (0);
+	mlx_clear_window(img->mlx, img->win);
+	choose_fractal(img);
+	return (0);
 static void	change_centered(t_data *i, int x, int y)
 {
 	i->offset_x = (x - WIDTH / 2.0) * (F_RAN / WIDTH) / i->zoom + i->offset_x;
@@ -78,3 +100,4 @@ int	key_hook(int keycode, void *param)
 	choose_fractal(img);
 	return (0);
 }
+
