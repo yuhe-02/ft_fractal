@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:27:18 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/29 08:36:42 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/09/29 09:11:20 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ static int	set_shape_param(t_data *img, int argc, char **argv)
 
 void	init_images(t_data *img, int argc, char **argv)
 {
+	img->bpp = 0;
+	img->llen = 0;
+	img->eda = 0;
 	set_shape_param(img, argc, argv);
 	img->color_flg = 1;
 	img->mlx = mlx_init();

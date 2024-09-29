@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:36:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/29 08:53:39 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/09/29 09:25:03 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,18 @@
 
 int	close_window(t_data *data)
 {
-	mlx_destroy_image(data->mlx, data->img);
-	mlx_destroy_window(data->mlx, data->win);
+	if (!data->mlx)
+		exit(0);
+	if (data->img)
+	{
+		mlx_destroy_image(data->mlx, data->img);
+		// data->img = NULL;
+	}
+	if (data->win)
+	{
+		mlx_destroy_window(data->mlx, data->win);
+		// data->win = NULL;
+	}
 	exit(0);
 }
 
@@ -49,7 +59,7 @@ int	key_hook(int keycode, void *param)
 
 	img = (t_data *)param;
 	if (keycode == KEY_ESC)
-		close_window(img->mlx);
+		close_window(img);
 	else if (keycode == KEY_LEFT)
 		img->offset_x -= (double)MOVE_MAG / img->zoom;
 	else if (keycode == KEY_RIGHT)

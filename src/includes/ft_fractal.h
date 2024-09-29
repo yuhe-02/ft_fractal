@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/29 08:14:31 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/09/29 14:37:31 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stddef.h>
 # include <unistd.h>
 # include <math.h>
-# include <complex.h>
+// # include <complex.h>
 
 typedef enum e_keys
 {
@@ -96,6 +96,12 @@ typedef struct s_coord
 	int		iterations;
 }			t_coord;
 
+typedef struct s_complex 
+{
+	double	real;
+	double	imag;
+}			t_complex;
+
 typedef t_coord	*(*t_fractal_func)(t_data *, int, int);
 typedef int		(*t_calc_color)(t_coord *, int);
 
@@ -123,5 +129,11 @@ int			calc_color2(t_coord *cd, int color_flg);
 int			calc_color1(t_coord *cd, int color_flg);
 void		set_error(char *message, int is_put_sample, int exit_no);
 void		put_mlx_pixel(t_data *data, int x, int y, int color);
-
+t_complex	ft_cpow(t_complex z, double power);
+double	ft_cabs(t_complex z1);
+t_complex	ft_complex_diff(t_complex z1, t_complex z2);
+t_complex	ft_complex_add(t_complex z1, t_complex z2);
+t_complex	ft_complex_div(t_complex z1, t_complex z2);
+t_complex	ft_complex_mul(t_complex z1, t_complex z2);
+t_complex	ft_complex_mul_st(t_complex z1, double st_value);
 #endif
