@@ -6,13 +6,13 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 16:18:35 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/29 16:27:20 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/09/29 07:30:22 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fractal.h"
 
-int	main(int argc, char **argv)
+int	main()
 {
 	int			count;
 	char		*message1;
@@ -52,16 +52,16 @@ int	main(int argc, char **argv)
 
 	count = 0;
 	message1 = "[handmade] before: [%s] after: [%f]\n";
-	message2 = "[origin] before: [%s] after: [%f]\n";
+	message2 = "[origin]   before: [%s] after: [%f]\n";
 	while (test_cases[count])
 	{
-		if (ft_is_valid_num(test_case[count]))
+		if (ft_is_valid_num(test_cases[count]))
 		{
-			if (handmade != origin)
+			if (ft_atob(test_cases[count]) != atof(test_cases[count]))
 			{
 				printf("%d: ×\n", count);
-				printf(message1, test_case[count], ft_atob(test_case[count]));
-				printf(message2, test_case[count], atof(test_case[count]));
+				printf(message1, test_cases[count], ft_atob(test_cases[count]));
+				printf(message2, test_cases[count], atof(test_cases[count]));
 			}
 			else
 			{
@@ -69,7 +69,7 @@ int	main(int argc, char **argv)
 			}
 		}
 		else
-			printf("invalid: %s\n", test_case[count]);
+			printf("invalid: %s\n", test_cases[count]);
 		count++;
 	}
 	return (0);
