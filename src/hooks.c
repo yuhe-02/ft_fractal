@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:36:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/29 15:03:24 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/09/30 00:11:05 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,6 @@ int	mouse_hook(int button, int x, int y, void *param)
 	mlx_clear_window(img->mlx, img->win);
 	choose_fractal(img);
 	return (0);
-static void	change_centered(t_data *i, int x, int y)
-{
-	i->offset_x = (x - WIDTH / 2.0) * (F_RAN / WIDTH) / i->zoom + i->offset_x;
-	i->offset_y = (y - HEIGHT / 2.0) * (F_RAN / HEIGHT) / i->zoom + i->offset_y;
 }
 
 int	mouse_hook(int button, int x, int y, void *param)
@@ -100,4 +96,3 @@ int	key_hook(int keycode, void *param)
 	choose_fractal(img);
 	return (0);
 }
-
