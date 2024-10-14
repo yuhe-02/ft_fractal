@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/30 00:11:55 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/10/08 15:02:55 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void		choose_fractal(t_data *img);
 t_coord		*calc_mandelbrot_set(t_data *img, int x, int y);
 t_coord		*calc_julia_set(t_data *img, int x, int y);
 int			close_window(t_data *data);
+void		close_window2(t_data *data);
 void		put_mlx_pixel(t_data *data, int x, int y, int color);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 double		ft_atob(const char *str);

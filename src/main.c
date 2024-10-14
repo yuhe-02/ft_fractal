@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:27:18 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/29 15:03:45 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:53:41 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ static int	set_shape_param(t_data *img, int argc, char **argv)
 	}
 	param_num = 4;
 	if (argc != param_num)
+	{
+		close_window(img);
 		set_error("ft_fractal: the number of parameter is invalid\n", 1, 1);
+	}
 	if (ft_strncmp(argv[1], JULIA_S, ft_strlen(JULIA_S) + 1) == 0)
 		img->set_type = JULIA;
 	else if (ft_strncmp(argv[1], MD_S, ft_strlen(MD_S) + 1) == 0)
@@ -42,9 +45,15 @@ static int	set_shape_param(t_data *img, int argc, char **argv)
 	else if (ft_strncmp(argv[1], BONUS_S, ft_strlen(BONUS_S) + 1) == 0)
 		img->set_type = BONUS;
 	else
+	{
+		close_window(img);
 		set_error("ft_fractal: cannot find shape name\n", 1, 1);
+	}
 	if (!validate_params(argv, param_num, 2))
+	{
+		close_window(img);
 		set_error("ft_fractal: invalid parameter\n", 1, 1);
+	}
 	img->param1 = ft_atob(argv[2]);
 	img->param2 = ft_atob(argv[3]);
 }
@@ -54,11 +63,12 @@ void	init_images(t_data *img, int argc, char **argv)
 	img->bpp = 0;
 	img->llen = 0;
 	img->eda = 0;
-	set_shape_param(img, argc, argv);
-	img->color_flg = 1;
+	img->mlx = NULL;
 	img->mlx = mlx_init();
 	img->win = mlx_new_window(img->mlx, WIDTH, HEIGHT, argv[1]);
 	img->img = mlx_new_image(img->mlx, WIDTH, HEIGHT);
+	set_shape_param(img, argc, argv);
+	img->color_flg = 1;
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->llen, &img->eda);
 	img->zoom = 1.0;
 	img->offset_x = 0.0;

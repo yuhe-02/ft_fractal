@@ -1,5 +1,5 @@
 NAME=ft_fractal
-CFLAGS=-Wall -Wextra -Werror -fsanitize=address
+CFLAGS=-Wall -Wextra -Werror
 CC = gcc
 
 COLORS= src/calc_colors/calc_color1.c src/calc_colors/calc_color2.c
