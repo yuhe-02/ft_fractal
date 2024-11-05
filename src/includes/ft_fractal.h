@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/10/08 15:02:55 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/10/31 15:58:41 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ typedef struct s_data
 	double	offset_x;
 	double	offset_y;
 	int		set_type;
-	double	param1;
-	double	param2;
 	int		color_flg;
 }			t_data;
 
@@ -114,16 +112,7 @@ int			close_window(t_data *data);
 void		close_window2(t_data *data);
 void		put_mlx_pixel(t_data *data, int x, int y, int color);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
-double		ft_atob(const char *str);
-char		*ft_strchr(const char *s, int c);
 int			ft_strlen(char *str);
-char		*ft_strrchr(const char *s, int c);
-int			ft_is_num(int c);
-int			ft_isspace(int c);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
-size_t		ft_strlcpy(char *dest, char const *src, size_t n);
-char		*ft_delete_space(const char *str);
-int			ft_is_valid_num(const char *str);
 t_coord		*calc_newton5_set(t_data *img, int x, int y);
 int			calc_color2(t_coord *cd, int color_flg);
 int			calc_color1(t_coord *cd, int color_flg);

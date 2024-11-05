@@ -6,22 +6,11 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:27:18 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/10/09 14:53:41 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:10:08 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fractal.h"
-
-static int	validate_params(char **argv, int param_num, int start_index)
-{
-	while (start_index < param_num)
-	{
-		if (!(ft_is_valid_num(argv[start_index])))
-			return (FT_FALSE);
-		start_index++;
-	}
-	return (FT_TRUE);
-}
 
 static int	set_shape_param(t_data *img, int argc, char **argv)
 {
@@ -31,12 +20,6 @@ static int	set_shape_param(t_data *img, int argc, char **argv)
 	{
 		if (!ft_strncmp(argv[1], "-h", 3) || !ft_strncmp(argv[1], "--help", 7))
 			set_error("", 1, 0);
-	}
-	param_num = 4;
-	if (argc != param_num)
-	{
-		close_window(img);
-		set_error("ft_fractal: the number of parameter is invalid\n", 1, 1);
 	}
 	if (ft_strncmp(argv[1], JULIA_S, ft_strlen(JULIA_S) + 1) == 0)
 		img->set_type = JULIA;
@@ -49,13 +32,6 @@ static int	set_shape_param(t_data *img, int argc, char **argv)
 		close_window(img);
 		set_error("ft_fractal: cannot find shape name\n", 1, 1);
 	}
-	if (!validate_params(argv, param_num, 2))
-	{
-		close_window(img);
-		set_error("ft_fractal: invalid parameter\n", 1, 1);
-	}
-	img->param1 = ft_atob(argv[2]);
-	img->param2 = ft_atob(argv[3]);
 }
 
 void	init_images(t_data *img, int argc, char **argv)
@@ -82,6 +58,14 @@ static void	set_hooks(t_data *img)
 	mlx_mouse_hook(img->win, mouse_hook, img);
 }
 
+static int	main_loop(t_data *img)
+{
+	// if (canvas->is_pressed_shift)
+	// 	update_fractal_c(canvas);
+	choose_fractal(img);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	img;
@@ -91,6 +75,7 @@ int	main(int argc, char **argv)
 	init_images(&img, argc, argv);
 	choose_fractal(&img);
 	set_hooks(&img);
+	mlx_loop_hook(img.mlx, &main_loop, &img);
 	mlx_loop(img.mlx);
 	return (0);
 }

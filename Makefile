@@ -4,10 +4,7 @@ CC = gcc
 
 COLORS= src/calc_colors/calc_color1.c src/calc_colors/calc_color2.c
 DRAWER= src/draw_fractal/ft_julia.c src/draw_fractal/ft_mandel.c src/draw_fractal/ft_newton5.c
-UTILS=	src/utils/ft_strncmp.c src/utils/ft_atob.c src/utils/ft_is_valid_num.c \
-		src/utils/ft_strlen.c src/utils/ft_strrchr.c src/utils/ft_strchr.c \
-		src/utils/ft_substr.c src/utils/ft_delete_space.c src/utils/ft_is_num.c \
-		src/utils/ft_strlcpy.c src/utils/ft_isspace.c \
+UTILS=	src/utils/ft_strncmp.c src/utils/ft_strlen.c \
 		src/set_error.c src/utils/ft_put_pixel.c
 MATH= src/math/ft_cabs.c src/math/ft_cpow.c src/math/ft_complex_diff.c \
 	  src/math/ft_complex_div.c src/math/ft_complex_add.c src/math/ft_complex_mul.c \
