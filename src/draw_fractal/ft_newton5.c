@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:43:22 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/29 15:01:18 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:31:54 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_coord	*calc_newton5_set(t_data *img, int x, int y)
 	cd = (t_coord *)malloc(sizeof(t_coord));
 	if (!cd)
 		exit(1);
+	# TODO review this calculation 
 	z.real = (x - WIDTH / 2.0) * (F_RAN / WIDTH) / img->zoom + img->offset_x;
 	z.imag = (y - HEIGHT / 2.0) * (F_RAN / HEIGHT) / img->zoom + img->offset_y;
 	root = root_of_func(z, &iterations, img->param1, img->param2);

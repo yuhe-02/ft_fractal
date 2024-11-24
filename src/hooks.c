@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:36:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/10/09 14:27:01 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:31:39 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ int close_window(t_data *data)
 {
 	if (!data)
 		exit(0);
-	if (data->img)
+	if (data->img.img)
 	{
-		mlx_destroy_image(data->mlx, data->img);
-		data->img = NULL;
+		mlx_destroy_image(data->mlx, data->img.img);
+		data->img.img = NULL;
 	}
 	if (data->win)
 	{
-	// 	// mlx_clear_window(data->mlx, data->win);
 		mlx_destroy_window(data->mlx, data->win); // ウィンドウを破棄
 		data->win = NULL;
 	}
@@ -43,6 +42,7 @@ int close_window(t_data *data)
 	return (0);
 }
 
+# TODO review this calculation 
 static void	change_centered(t_data *i, int x, int y)
 {
 	i->offset_x = (x - WIDTH / 2.0) * (F_RAN / WIDTH) / i->zoom + i->offset_x;
@@ -63,7 +63,6 @@ int	mouse_hook(int button, int x, int y, void *param)
 	else
 		return (0);
 	mlx_clear_window(img->mlx, img->win);
-	choose_fractal(img);
 	return (0);
 }
 
@@ -89,6 +88,5 @@ int	key_hook(int keycode, void *param)
 	else
 		return (0);
 	mlx_clear_window(img->mlx, img->win);
-	choose_fractal(img);
 	return (0);
 }

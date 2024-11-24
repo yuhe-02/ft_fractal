@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/10/08 15:02:55 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:37:39 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,31 +60,15 @@ typedef enum e_shapes
 # define MOVE_MAG 0.05
 # define F_RAN 2.0
 # define DEPTH 20
-# define MAX_ITER 300
+# define MAX_ITER 100
+# define DEFAULT_JULIA_C_RE 0.4
+# define DEFAULT_JULIA_C_IM -0.325
 # define EPS 1e-10
 # define WINDOW_CLOSE 17
 # define SENTENCE1 "Below is sample valid parameters.\n"
 # define SENTENCE2 "./ft_fractal julia -0.3 -0.63\n"
 # define SENTENCE3 "./ft_fractal mandelbrot 0 0\n"
 # define SENTENCE4 "./ft_fractal bonus 3 -2\n"
-
-typedef struct s_data
-{
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		llen;
-	int		eda;
-	double	zoom;
-	double	offset_x;
-	double	offset_y;
-	int		set_type;
-	double	param1;
-	double	param2;
-	int		color_flg;
-}			t_data;
 
 typedef struct s_coord
 {
@@ -101,13 +85,50 @@ typedef struct s_complex
 	double	imag;
 }			t_complex;
 
+typedef struct s_data t_data;
 typedef t_coord	*(*t_fractal_func)(t_data *, int, int);
 typedef int		(*t_calc_color)(t_coord *, int);
+
+typedef struct s_img {
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			llen;
+	int			eda;
+	int			width;
+	int			height;
+}				t_img;
+
+typedef struct s_data
+{
+	void	*mlx;
+	void	*win;
+	t_img	img;
+	double	zoom;
+	double	offset_x;
+	double	offset_y;
+	double	param1;
+	double	param2;
+	int		color_flg;
+	t_fractal_func	calc_set;
+	t_calc_color		calc_color;
+	int				is_pressed_shift;
+	double				min_re;
+	double				min_im;
+	double				max_re;
+	double				max_im;
+	int					max_iter;
+	double				z_re;
+	double				z_im;
+	double				c_re;
+	double				c_im;
+	double				delta_re;
+	double				delta_im;
+}			t_data;
 
 void		init_images(t_data *img, int argc, char **argv);
 int			key_hook(int keycode, void *param);
 int			mouse_hook(int button, int x, int y, void *param);
-void		choose_fractal(t_data *img);
 t_coord		*calc_mandelbrot_set(t_data *img, int x, int y);
 t_coord		*calc_julia_set(t_data *img, int x, int y);
 int			close_window(t_data *data);
@@ -136,4 +157,5 @@ t_complex	ft_complex_add(t_complex z1, t_complex z2);
 t_complex	ft_complex_div(t_complex z1, t_complex z2);
 t_complex	ft_complex_mul(t_complex z1, t_complex z2);
 t_complex	ft_complex_mul_st(t_complex z1, double st_value);
+void	draw_fractal(t_data *img, t_fractal_func func, t_calc_color cal_color);
 #endif
