@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:43:22 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/29 15:01:18 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/24 16:10:59 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,19 @@ static	t_complex	root_of_func(t_complex z,
 	return (z_new);
 }
 
-t_coord	*calc_newton5_set(t_data *img, int x, int y)
+t_param *calc_newton5_set(t_param *param, int x, int y)
 {
-	t_coord			*cd;
 	int				iterations;
 	t_complex		z;
 	t_complex		root;
 
-	cd = (t_coord *)malloc(sizeof(t_coord));
-	if (!cd)
-		exit(1);
-	z.real = (x - WIDTH / 2.0) * (F_RAN / WIDTH) / img->zoom + img->offset_x;
-	z.imag = (y - HEIGHT / 2.0) * (F_RAN / HEIGHT) / img->zoom + img->offset_y;
-	root = root_of_func(z, &iterations, img->param1, img->param2);
-	cd->cx = z.real;
-	cd->cy = z.imag;
-	cd->zx = root.real;
-	cd->zy = root.imag;
-	cd->iterations = iterations;
-	return (cd);
+	z.real = (x - WIDTH / 2.0) * (F_RAN / WIDTH) / param->zoom + param->offset_x;
+	z.imag = (y - HEIGHT / 2.0) * (F_RAN / HEIGHT) / param->zoom + param->offset_y;
+	root = root_of_func(z, &iterations, param->param1, param->param2);
+	param->c_re = z.real;
+	param->c_im = z.imag;
+	param->z_re = root.real;
+	param->c_im = root.imag;
+	param->iteration = iterations;
+	return (param);
 }

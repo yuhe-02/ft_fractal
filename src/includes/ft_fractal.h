@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/30 00:11:55 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/24 16:05:49 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ typedef enum e_shapes
 # define BONUS_S "bonus"
 # define WIDTH 400
 # define HEIGHT 400
-# define ACRAC 1000
+# define ACRAC 100
 # define FT_TRUE 1
 # define FT_FALSE 0
 # define ZOOM_MAG 1.2
 # define MOVE_MAG 0.05
 # define F_RAN 2.0
 # define DEPTH 20
-# define MAX_ITER 300
+# define MAX_ITER 100
 # define EPS 1e-10
 # define WINDOW_CLOSE 17
 # define SENTENCE1 "Below is sample valid parameters.\n"
@@ -77,23 +77,46 @@ typedef struct s_data
 	int		bpp;
 	int		llen;
 	int		eda;
-	double	zoom;
-	double	offset_x;
-	double	offset_y;
-	int		set_type;
-	double	param1;
-	double	param2;
-	int		color_flg;
+	int		width;
+	int		height;
 }			t_data;
 
-typedef struct s_coord
+typedef struct s_param
 {
-	double	cx;
-	double	cy;
-	double	zx;
-	double	zy;
-	int		iterations;
-}			t_coord;
+	void				*mlx;
+	void				*win;
+	t_data				data;
+	double				min_re;
+	double				min_im;
+	double				max_re;
+	double				max_im;
+	int					max_iter;
+	double				z_re;
+	double				z_im;
+	double				c_re;
+	double				c_im;
+	int					iteration;
+	double				delta_re;
+	double				delta_im;
+	double				offset_x;
+	double				offset_y;
+	int					set_type;
+	double				param1;
+	double				param2;
+	double				zoom;
+	int					color_flg;
+}			t_param;
+
+
+
+// typedef struct s_coord
+// {
+// 	double	cx;
+// 	double	cy;
+// 	double	zx;
+// 	double	zy;
+// 	int		iterations;
+// }			t_coord;
 
 typedef struct s_complex
 {
@@ -101,17 +124,18 @@ typedef struct s_complex
 	double	imag;
 }			t_complex;
 
-typedef t_coord	*(*t_fractal_func)(t_data *, int, int);
-typedef int		(*t_calc_color)(t_coord *, int);
+typedef t_param	*(*t_fractal_func)(t_param *, int, int);
+typedef int		(*t_calc_color)(t_param *, int);
 
-void		init_images(t_data *img, int argc, char **argv);
+void		init_images(t_param *img, int argc, char **argv);
 int			key_hook(int keycode, void *param);
 int			mouse_hook(int button, int x, int y, void *param);
-void		choose_fractal(t_data *img);
-t_coord		*calc_mandelbrot_set(t_data *img, int x, int y);
-t_coord		*calc_julia_set(t_data *img, int x, int y);
-int			close_window(t_data *data);
-void		put_mlx_pixel(t_data *data, int x, int y, int color);
+void		choose_fractal(t_param *img);
+t_param 	*calc_mandelbrot_set(t_param *img, int x, int y);
+t_param		*calc_julia_set(t_param *img, int x, int y);
+int			close_window(t_param *data);
+void		close_window2(t_param *data);
+void		put_mlx_pixel(t_param *data, int x, int y, int color);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 double		ft_atob(const char *str);
 char		*ft_strchr(const char *s, int c);
@@ -123,11 +147,11 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 size_t		ft_strlcpy(char *dest, char const *src, size_t n);
 char		*ft_delete_space(const char *str);
 int			ft_is_valid_num(const char *str);
-t_coord		*calc_newton5_set(t_data *img, int x, int y);
-int			calc_color2(t_coord *cd, int color_flg);
-int			calc_color1(t_coord *cd, int color_flg);
+t_param		*calc_newton5_set(t_param *img, int x, int y);
+int			calc_color2(t_param *cd, int color_flg);
+int			calc_color1(t_param *cd, int color_flg);
 void		set_error(char *message, int is_put_sample, int exit_no);
-void		put_mlx_pixel(t_data *data, int x, int y, int color);
+void		put_mlx_pixel(t_param *data, int x, int y, int color);
 t_complex	ft_cpow(t_complex z, double power);
 double		ft_cabs(t_complex z1);
 t_complex	ft_complex_diff(t_complex z1, t_complex z2);
