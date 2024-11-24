@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_newton5_c.c                                     :+:      :+:    :+:   */
+/*   ft_newton5_k.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:43:22 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/29 12:08:08 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/24 15:59:40 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static	double	complex	root_of_func(double complex z,
 	return (z_new);
 }
 
-t_coord	*calc_newton5_set(t_data *img, int x, int y)
+t_coord	*calc_newton5_set(t_param *param, int x, int y)
 {
 	t_coord			*cd;
 	int				iterations;
@@ -60,10 +60,10 @@ t_coord	*calc_newton5_set(t_data *img, int x, int y)
 	cd = (t_coord *)malloc(sizeof(t_coord));
 	if (!cd)
 		exit(1);
-	cd->zx = (x - WIDTH / 2.0) * (F_RAN / WIDTH) / img->zoom + img->offset_x;
-	cd->cx = (y - HEIGHT / 2.0) * (F_RAN / HEIGHT) / img->zoom + img->offset_y;
+	cd->zx = (x - WIDTH / 2.0) * (F_RAN / WIDTH) / param->zoom + param->offset_x;
+	cd->cx = (y - HEIGHT / 2.0) * (F_RAN / HEIGHT) / param->zoom + param->offset_y;
 	z = cd->zx + cd->cx * I;
-	root = root_of_func(z, &iterations, img->param1, img->param2);
+	root = root_of_func(z, &iterations, param->param1, param->param2);
 	cd->cx = creal(z);
 	cd->cy = cimag(z);
 	cd->zx = creal(root);
