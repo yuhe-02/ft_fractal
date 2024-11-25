@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:27:18 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/24 16:01:57 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:28:35 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,23 @@ static int	set_shape_param(t_param *param, int argc, char **argv)
 		set_error("ft_fractal: the number of parameter is invalid\n", 1, 1);
 	}
 	if (ft_strncmp(argv[1], JULIA_S, ft_strlen(JULIA_S) + 1) == 0)
+	{
 		param->set_type = JULIA;
+		param->calculator = calc_julia_set;
+		param->calc_color = calc_color1;
+	}
 	else if (ft_strncmp(argv[1], MD_S, ft_strlen(MD_S) + 1) == 0)
+	{
 		param->set_type = MANDELBROT;
+		param->calculator = calc_mandelbrot_set;
+		param->calc_color = calc_color1;
+	}
 	else if (ft_strncmp(argv[1], BONUS_S, ft_strlen(BONUS_S) + 1) == 0)
+	{
 		param->set_type = BONUS;
+		param->calculator = calc_newton5_set;
+		param->calc_color = calc_color2;
+	}
 	else
 	{
 		close_window(param);
@@ -61,11 +73,13 @@ static int	set_shape_param(t_param *param, int argc, char **argv)
 void	init_images(t_param *param, int argc, char **argv)
 {
 	set_shape_param(param, argc, argv);
+	param->max_re = 2;
+	param->max_im = 2;
+	param->min_re = -2;
+	param->min_im = -2;
+	param->max_iter = MAX_ITER;
 	param->color_flg = 1;
 	param->data.addr = mlx_get_data_addr(param->data.img, &(param->data.bpp), &(param->data.llen), &(param->data.eda));
-	param->zoom = 1.0;
-	param->offset_x = 0.0;
-	param->offset_y = 0.0;
 }
 
 void	initialize_param(t_param *param, int argc, char **argv)
@@ -83,11 +97,6 @@ void	initialize_param(t_param *param, int argc, char **argv)
 	param->data.addr = mlx_get_data_addr(param->data.img,
 			&param->data.bpp,
 			&param->data.llen, &param->data.eda);
-	param->max_re = 2;
-	param->max_im = 2;
-	param->min_re = -2;
-	param->min_im = -2;
-	param->max_iter = MAX_ITER;
 	init_images(param, argc, argv);
 	// param->c_re = DEFAULT_JULIA_C_RE;
 	// param->c_im = DEFAULT_JULIA_C_IM;
@@ -100,6 +109,16 @@ static void	set_hooks(t_param *param)
 	mlx_mouse_hook(param->win, mouse_hook, param);
 }
 
+int	main_loop(t_param *param)
+{
+	// if (canvas->is_pressed_shift)
+	// 	update_fractal_c(canvas);
+	// param->fractal_drawer(canvas);
+	// mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img.img, 0, 0);
+	choose_fractal(param);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_param	param;
@@ -110,6 +129,7 @@ int	main(int argc, char **argv)
 	initialize_param(&param, argc, argv);
 	choose_fractal(&param);
 	set_hooks(&param);
+	mlx_loop_hook(param.mlx, &main_loop, &param);
 	mlx_loop(param.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 00:01:36 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/24 16:09:44 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:10:40 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	calc_color1(t_param *param, int color_flg)
 	double	tmp;
 
 	i = 0;
-	while (param->z_re * param->z_re + param->z_im * param->z_im < 4 && i < ACRAC)
+	while (param->z_re * param->z_re + param->z_im * param->z_im <= 4 && i < param->max_iter)
 	{
 		tmp = param->z_re * param->z_re - param->z_im * param->z_im + param->c_re;
 		param->z_im = 2.0 * param->z_re * param->z_im + param->c_im;
 		param->z_re = tmp;
 		i++;
 	}
-	if (i == ACRAC)
+	if (i == param->max_iter)
 		i = 0;
 	color = i * 10000 * color_flg;
 	return (color);

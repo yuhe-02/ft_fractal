@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/24 16:05:49 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:57:42 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef enum e_shapes
 # define SENTENCE3 "./ft_fractal mandelbrot 0 0\n"
 # define SENTENCE4 "./ft_fractal bonus 3 -2\n"
 
+typedef struct s_param t_param;
+
 typedef struct s_data
 {
 	void	*mlx;
@@ -105,6 +107,8 @@ typedef struct s_param
 	double				param2;
 	double				zoom;
 	int					color_flg;
+	t_param *			(*calculator)(t_param *, int, int);
+	int					(*calc_color)(t_param *, int);
 }			t_param;
 
 
@@ -123,9 +127,6 @@ typedef struct s_complex
 	double	real;
 	double	imag;
 }			t_complex;
-
-typedef t_param	*(*t_fractal_func)(t_param *, int, int);
-typedef int		(*t_calc_color)(t_param *, int);
 
 void		init_images(t_param *img, int argc, char **argv);
 int			key_hook(int keycode, void *param);

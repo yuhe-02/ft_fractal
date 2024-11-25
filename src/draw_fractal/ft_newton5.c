@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:43:22 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/24 16:10:59 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:28:15 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ t_param *calc_newton5_set(t_param *param, int x, int y)
 	t_complex		z;
 	t_complex		root;
 
-	z.real = (x - WIDTH / 2.0) * (F_RAN / WIDTH) / param->zoom + param->offset_x;
-	z.imag = (y - HEIGHT / 2.0) * (F_RAN / HEIGHT) / param->zoom + param->offset_y;
+	z.imag = param->min_im + y * param->delta_im;
+	z.real = param->min_re + x * param->delta_re;
 	root = root_of_func(z, &iterations, param->param1, param->param2);
 	param->c_re = z.real;
 	param->c_im = z.imag;
