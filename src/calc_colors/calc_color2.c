@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 00:02:24 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/25 13:11:17 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:36:06 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 int	calc_color2(t_param *param, int color_flg)
 {
-	double	ratio;
-	int		red;
-	int		green;
-	int		blue;
+    // int color;
 
-	ratio = ((double)param->iteration / param->max_iter) * (double)color_flg;
-	red = (int)(9 * (1 - ratio) * ratio * ratio * ratio * 255);
-	green = (int)(15 * (1 - ratio) * (1 - ratio) * ratio * ratio * 255);
-	blue = (int)(8.5 * (1 - ratio) * (1 - ratio) * (1 - ratio) * ratio * 255);
-	return ((red << 16) | (green << 8) | blue);
+	return (get_colors(param->iteration, param->max_iter, param, color_flg));
+	// if (param->iteration == param->max_iter)
+	// 	color = rgb2hex(0, 0, 0);
+	// else
+	// 	color = hsv2hex(param->iteration % 360, (double)param->iteration / param->max_iter,
+	// 			((double)param->iteration / param->max_iter));
+    // return color;
 }

@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   mouse_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:36:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/25 13:49:54 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:32:00 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fractal.h"
-
-int close_window(t_param *param)
-{
-	if (!param)
-		exit(0);
-	if (param->data.img)
-		mlx_destroy_image(param->mlx, param->data.img);
-	if (param->win)
-		mlx_destroy_window(param->mlx, param->win); // ウィンドウを破棄
-	if (param->mlx)
-	{
-		mlx_destroy_display(param->mlx); // ディスプレイを破棄
-		free(param->mlx);
-		param->mlx = NULL;
-	}
-	exit(0);
-	return (0);
-}
 
 static double	interpolate(double start, double end, double interpolation)
 {
@@ -101,25 +83,5 @@ int	mouse_hook(int button, int x, int y, void *data)
 		mlx_clear_window(param->mlx, param->win);
 		choose_fractal(param);
 	}
-	return (0);
-}
-
-int	key_hook(int keycode, void *data)
-{
-	t_param	*param;
-
-	param = (t_param *)data;
-	if (keycode == KEY_ESC)
-		close_window(param);
-	else if (keycode == KEY_UP || keycode == KEY_DOWN || keycode == KEY_RIGHT || KEY_LEFT)
-		move_by_key(keycode, param);
-	else if (keycode == KEY_C)
-		param->color_flg = 10;
-	else if (keycode == KEY_B)
-		param->color_flg = 1;
-	else
-		return (0);
-	mlx_clear_window(param->mlx, param->win);
-	choose_fractal(param);
 	return (0);
 }

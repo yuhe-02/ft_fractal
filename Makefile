@@ -2,7 +2,7 @@ NAME=ft_fractal
 CFLAGS=-Wall -Wextra -Werror
 CC = gcc
 
-COLORS= src/calc_colors/calc_color1.c src/calc_colors/calc_color2.c
+COLORS= src/calc_colors/calc_color1.c src/calc_colors/calc_color2.c src/calc_colors/color_manage.c
 DRAWER= src/draw_fractal/ft_julia.c src/draw_fractal/ft_mandel.c src/draw_fractal/ft_newton5.c
 UTILS=	src/utils/ft_strncmp.c src/utils/ft_atob.c src/utils/ft_is_valid_num.c \
 		src/utils/ft_strlen.c src/utils/ft_strrchr.c src/utils/ft_strchr.c \
@@ -12,7 +12,7 @@ UTILS=	src/utils/ft_strncmp.c src/utils/ft_atob.c src/utils/ft_is_valid_num.c \
 MATH= src/math/ft_cabs.c src/math/ft_cpow.c src/math/ft_complex_diff.c \
 	  src/math/ft_complex_div.c src/math/ft_complex_add.c src/math/ft_complex_mul.c \
 	  src/math/ft_complex_mul_st.c
-SRCS=src/choose_fractal.c src/hooks.c
+SRCS=src/choose_fractal.c src/key_hooks.c src/mouse_hooks.c src/close_window.c
 MAIN=src/main.c 
 SRCS+=$(COLORS)
 SRCS+=$(DRAWER)
