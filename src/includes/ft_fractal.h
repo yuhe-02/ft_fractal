@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/25 12:57:42 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:46:40 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stddef.h>
 # include <unistd.h>
 # include <math.h>
+# include <stdint.h>
 
 typedef enum e_keys
 {
@@ -30,8 +31,9 @@ typedef enum e_keys
 	KEY_UP = 65362,
 	KEY_RIGHT = 65363,
 	KEY_DOWN = 65364,
-	KEY_C = 99,
-	KEY_B = 98
+	KEY_SHIFT = 65505,
+	KEY_SPACE = 32,
+	KEY_ENTER = 65293
 }	t_keys;
 
 typedef enum e_mouses
@@ -53,13 +55,10 @@ typedef enum e_shapes
 # define BONUS_S "bonus"
 # define WIDTH 400
 # define HEIGHT 400
-# define ACRAC 100
 # define FT_TRUE 1
 # define FT_FALSE 0
 # define ZOOM_MAG 1.2
 # define MOVE_MAG 0.05
-# define F_RAN 2.0
-# define DEPTH 20
 # define MAX_ITER 100
 # define EPS 1e-10
 # define WINDOW_CLOSE 17
@@ -109,18 +108,8 @@ typedef struct s_param
 	int					color_flg;
 	t_param *			(*calculator)(t_param *, int, int);
 	int					(*calc_color)(t_param *, int);
+	int					shift_flg;
 }			t_param;
-
-
-
-// typedef struct s_coord
-// {
-// 	double	cx;
-// 	double	cy;
-// 	double	zx;
-// 	double	zy;
-// 	int		iterations;
-// }			t_coord;
 
 typedef struct s_complex
 {
@@ -135,7 +124,6 @@ void		choose_fractal(t_param *img);
 t_param 	*calc_mandelbrot_set(t_param *img, int x, int y);
 t_param		*calc_julia_set(t_param *img, int x, int y);
 int			close_window(t_param *data);
-void		close_window2(t_param *data);
 void		put_mlx_pixel(t_param *data, int x, int y, int color);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 double		ft_atob(const char *str);
@@ -160,4 +148,9 @@ t_complex	ft_complex_add(t_complex z1, t_complex z2);
 t_complex	ft_complex_div(t_complex z1, t_complex z2);
 t_complex	ft_complex_mul(t_complex z1, t_complex z2);
 t_complex	ft_complex_mul_st(t_complex z1, double st_value);
+double	abs_double(double val);
+uint32_t	rgb2hex(int r, int g, int b);
+uint32_t	hsv2hex(double h, double s, double v);
+void	update_fractal_c(t_param *param);
+int	get_colors(int iteration, int max_iter, t_param *param, int color_flg);
 #endif

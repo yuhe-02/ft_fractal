@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:27:18 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/25 13:28:35 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:29:43 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	init_images(t_param *param, int argc, char **argv)
 	param->min_re = -2;
 	param->min_im = -2;
 	param->max_iter = MAX_ITER;
-	param->color_flg = 1;
+	param->color_flg = 0;
 	param->data.addr = mlx_get_data_addr(param->data.img, &(param->data.bpp), &(param->data.llen), &(param->data.eda));
 }
 
@@ -98,8 +98,6 @@ void	initialize_param(t_param *param, int argc, char **argv)
 			&param->data.bpp,
 			&param->data.llen, &param->data.eda);
 	init_images(param, argc, argv);
-	// param->c_re = DEFAULT_JULIA_C_RE;
-	// param->c_im = DEFAULT_JULIA_C_IM;
 }
 
 static void	set_hooks(t_param *param)
@@ -111,8 +109,8 @@ static void	set_hooks(t_param *param)
 
 int	main_loop(t_param *param)
 {
-	// if (canvas->is_pressed_shift)
-	// 	update_fractal_c(canvas);
+	if (param->shift_flg)
+		update_fractal_c(param);
 	// param->fractal_drawer(canvas);
 	// mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img.img, 0, 0);
 	choose_fractal(param);

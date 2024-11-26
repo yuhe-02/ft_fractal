@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:43:22 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/25 13:28:15 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:06:55 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,10 @@ static	t_complex	newton_method(t_complex z,
 
 	f = ft_cpow(z, power);
 	f.real += section;
-	// printf("f    : %f + %fi\n", f.real, f.imag);
 	df = ft_complex_mul_st(ft_cpow(z, power - 1), power);
-	// printf("df   : %f + %fi\n", df.real, df.imag);
 	if (df.real == 0 && df.imag == 0)
 		return (z);
 	res = ft_complex_diff(z, ft_complex_div(f, df));
-	// printf("res  : %f + %fi\n", res.real, res.imag);
 	return (res);
 }
 
@@ -42,7 +39,6 @@ static	t_complex	root_of_func(t_complex z,
 	while (counter < MAX_ITER)
 	{
 		z_new = newton_method(z, power, section);
-		// printf("z_new: %f + %fi\n", z_new.real, z_new.imag);
 		eps = ft_cabs(ft_complex_diff(z_new, z));
 		if (eps < EPS)
 			break ;
