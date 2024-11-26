@@ -6,33 +6,20 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:36:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/25 13:30:14 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:49:54 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fractal.h"
-
-void close_window2(t_param *data)
-{
-	close_window(data);
-	exit(0);
-}
 
 int close_window(t_param *param)
 {
 	if (!param)
 		exit(0);
 	if (param->data.img)
-	{
 		mlx_destroy_image(param->mlx, param->data.img);
-		param->data.img = NULL;
-	}
 	if (param->win)
-	{
-	// 	// mlx_clear_window(data->mlx, data->win);
 		mlx_destroy_window(param->mlx, param->win); // ウィンドウを破棄
-		param->win = NULL;
-	}
 	if (param->mlx)
 	{
 		mlx_destroy_display(param->mlx); // ディスプレイを破棄
@@ -48,7 +35,7 @@ static double	interpolate(double start, double end, double interpolation)
 	return (start + ((end - start) * interpolation));
 }
 
-int	mouse_hook(int button, int x, int y, void *img)
+static void	move_by_zoom(int button, int x, int y, void *img)
 {
 	double	mouse_re;
 	double	mouse_im;
@@ -72,23 +59,15 @@ int	mouse_hook(int button, int x, int y, void *img)
 		interpolation = 1.0 / 1.2;
 	}
 	else
-		return (0);
+		return ;
 	param->min_re = interpolate(mouse_re, param->min_re, interpolation);
 	param->min_im = interpolate(mouse_im, param->min_im, interpolation);
 	param->max_re = interpolate(mouse_re, param->max_re, interpolation);
 	param->max_im = interpolate(mouse_im, param->max_im, interpolation);
-	mlx_clear_window(param->mlx, param->win);
-	choose_fractal(param);
-	return (0);
 }
 
-int	key_hook(int keycode, void *data)
+static void move_by_key(int keycode, t_param *param)
 {
-	t_param	*param;
-
-	param = (t_param *)data;
-	if (keycode == KEY_ESC)
-		close_window(param);
 	if (keycode == KEY_UP)
 	{
 		param->min_im -= (param->max_im - param->min_im) * MOVE_MAG;
@@ -109,6 +88,31 @@ int	key_hook(int keycode, void *data)
 		param->min_re -= (param->max_re - param->min_re) * MOVE_MAG;
 		param->max_re -= (param->max_re - param->min_re) * MOVE_MAG;
 	}
+}
+
+int	mouse_hook(int button, int x, int y, void *data)
+{
+	t_param	*param;
+
+	param = (t_param *)data;
+	if (button == MOUSE_WHEEL_UP || button == MOUSE_WHEEL_DOWN)
+	{
+		move_by_zoom(button, x, y, param);
+		mlx_clear_window(param->mlx, param->win);
+		choose_fractal(param);
+	}
+	return (0);
+}
+
+int	key_hook(int keycode, void *data)
+{
+	t_param	*param;
+
+	param = (t_param *)data;
+	if (keycode == KEY_ESC)
+		close_window(param);
+	else if (keycode == KEY_UP || keycode == KEY_DOWN || keycode == KEY_RIGHT || KEY_LEFT)
+		move_by_key(keycode, param);
 	else if (keycode == KEY_C)
 		param->color_flg = 10;
 	else if (keycode == KEY_B)

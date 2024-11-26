@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:27:18 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/25 13:28:35 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:46:40 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ void	initialize_param(t_param *param, int argc, char **argv)
 			&param->data.bpp,
 			&param->data.llen, &param->data.eda);
 	init_images(param, argc, argv);
-	// param->c_re = DEFAULT_JULIA_C_RE;
-	// param->c_im = DEFAULT_JULIA_C_IM;
 }
 
 static void	set_hooks(t_param *param)

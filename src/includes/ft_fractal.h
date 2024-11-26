@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/25 12:57:42 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:49:21 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,17 +111,6 @@ typedef struct s_param
 	int					(*calc_color)(t_param *, int);
 }			t_param;
 
-
-
-// typedef struct s_coord
-// {
-// 	double	cx;
-// 	double	cy;
-// 	double	zx;
-// 	double	zy;
-// 	int		iterations;
-// }			t_coord;
-
 typedef struct s_complex
 {
 	double	real;
@@ -135,7 +124,6 @@ void		choose_fractal(t_param *img);
 t_param 	*calc_mandelbrot_set(t_param *img, int x, int y);
 t_param		*calc_julia_set(t_param *img, int x, int y);
 int			close_window(t_param *data);
-void		close_window2(t_param *data);
 void		put_mlx_pixel(t_param *data, int x, int y, int color);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 double		ft_atob(const char *str);
