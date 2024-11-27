@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fractal.h                                       :+:      :+:    :+:   */
+/*   ft_fractol.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/26 15:46:40 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:17:22 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_FRACTAL_H
-# define FT_FRACTAL_H
+#ifndef FT_FRACTOL_H
+# define FT_FRACTOL_H
 
 # include "mlx.h"
 # include <stdio.h>
@@ -43,16 +43,9 @@ typedef enum e_mouses
 	MOUSE_WHEEL_DOWN = 5
 }	t_mouses;
 
-typedef enum e_shapes
-{
-	JULIA = 0,
-	MANDELBROT = 1,
-	BONUS = 2
-}	t_shapes;
-
 # define JULIA_S "julia"
 # define MD_S "mandelbrot"
-# define BONUS_S "bonus"
+# define BONUS_S "newton"
 # define WIDTH 400
 # define HEIGHT 400
 # define FT_TRUE 1
@@ -63,11 +56,11 @@ typedef enum e_shapes
 # define EPS 1e-10
 # define WINDOW_CLOSE 17
 # define SENTENCE1 "Below is sample valid parameters.\n"
-# define SENTENCE2 "./ft_fractal julia -0.3 -0.63\n"
-# define SENTENCE3 "./ft_fractal mandelbrot 0 0\n"
-# define SENTENCE4 "./ft_fractal bonus 3 -2\n"
+# define SENTENCE2 "./ft_fractol julia -0.3 -0.63\n"
+# define SENTENCE3 "./ft_fractol mandelbrot 0 0\n"
+# define SENTENCE4 "./ft_fractol newton 3 -2\n"
 
-typedef struct s_param t_param;
+typedef struct s_param	t_param;
 
 typedef struct s_data
 {
@@ -99,16 +92,13 @@ typedef struct s_param
 	int					iteration;
 	double				delta_re;
 	double				delta_im;
-	double				offset_x;
-	double				offset_y;
-	int					set_type;
 	double				param1;
 	double				param2;
 	double				zoom;
 	int					color_flg;
-	t_param *			(*calculator)(t_param *, int, int);
-	int					(*calc_color)(t_param *, int);
 	int					shift_flg;
+	t_param				*(*calculator)(t_param*, int, int);
+	int					(*calc_color)(t_param*, int);
 }			t_param;
 
 typedef struct s_complex
@@ -117,14 +107,35 @@ typedef struct s_complex
 	double	imag;
 }			t_complex;
 
+// minilibx
+int			ft_is_valid_num(const char *str);
+int			validate_params(char **argv, int param_num, int start_index);
+int			check_params(int ac, char **av);
 void		init_images(t_param *img, int argc, char **argv);
+void		initialize_param(t_param *param, int argc, char **argv);
+int			set_shape_param(t_param *param, int argc, char **argv);
+void		set_error(char *message, int is_put_sample, int exit_no);
+void		display_errorlog(char *message, int is_put_sample);
 int			key_hook(int keycode, void *param);
 int			mouse_hook(int button, int x, int y, void *param);
-void		choose_fractal(t_param *img);
-t_param 	*calc_mandelbrot_set(t_param *img, int x, int y);
-t_param		*calc_julia_set(t_param *img, int x, int y);
-int			close_window(t_param *data);
+void		draw_fractol(t_param *img);
 void		put_mlx_pixel(t_param *data, int x, int y, int color);
+void		update_fractol_c(t_param *param);
+int			close_window(t_param *data);
+
+// calc colors
+t_param		*calc_mandelbrot_set(t_param *img, int x, int y);
+t_param		*calc_julia_set(t_param *img, int x, int y);
+t_param		*calc_newton5_set(t_param *img, int x, int y);
+int			calc_color2(t_param *cd, int color_flg);
+int			calc_color1(t_param *cd, int color_flg);
+uint32_t	rgb2hex(int r, int g, int b);
+uint32_t	hsv2hex(double h, double s, double v);
+int			get_colors(int iteration, int max_iter,
+				t_param *param, int color_flg);
+void		draw_fractol(t_param *param);
+
+// util
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 double		ft_atob(const char *str);
 char		*ft_strchr(const char *s, int c);
@@ -135,12 +146,9 @@ int			ft_isspace(int c);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 size_t		ft_strlcpy(char *dest, char const *src, size_t n);
 char		*ft_delete_space(const char *str);
-int			ft_is_valid_num(const char *str);
-t_param		*calc_newton5_set(t_param *img, int x, int y);
-int			calc_color2(t_param *cd, int color_flg);
-int			calc_color1(t_param *cd, int color_flg);
-void		set_error(char *message, int is_put_sample, int exit_no);
-void		put_mlx_pixel(t_param *data, int x, int y, int color);
+double		abs_double(double val);
+
+// math
 t_complex	ft_cpow(t_complex z, double power);
 double		ft_cabs(t_complex z1);
 t_complex	ft_complex_diff(t_complex z1, t_complex z2);
@@ -148,9 +156,4 @@ t_complex	ft_complex_add(t_complex z1, t_complex z2);
 t_complex	ft_complex_div(t_complex z1, t_complex z2);
 t_complex	ft_complex_mul(t_complex z1, t_complex z2);
 t_complex	ft_complex_mul_st(t_complex z1, double st_value);
-double	abs_double(double val);
-uint32_t	rgb2hex(int r, int g, int b);
-uint32_t	hsv2hex(double h, double s, double v);
-void	update_fractal_c(t_param *param);
-int	get_colors(int iteration, int max_iter, t_param *param, int color_flg);
 #endif

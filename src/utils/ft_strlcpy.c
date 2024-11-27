@@ -6,11 +6,11 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 00:10:20 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/26 00:10:25 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:48:07 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_fractal.h"
+#include "ft_fractol.h"
 
 size_t	ft_strlcpy(char *dest, char const *src, size_t n)
 {

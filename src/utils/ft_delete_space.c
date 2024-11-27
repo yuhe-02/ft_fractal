@@ -6,11 +6,11 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 00:12:30 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/26 00:12:57 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:48:07 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_fractal.h"
+#include "ft_fractol.h"
 
 char	*ft_delete_space(const char *str)
 {

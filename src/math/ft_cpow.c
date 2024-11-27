@@ -6,11 +6,11 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 10:08:43 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/30 00:13:53 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:48:07 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_fractal.h"
+#include "ft_fractol.h"
 
 t_complex	ft_cpow(t_complex z, double power)
 {

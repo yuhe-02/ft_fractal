@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   choose_fractal.c                                   :+:      :+:    :+:   */
+/*   draw_fractol.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:23:27 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/25 13:22:38 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:06:44 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_fractal.h"
+#include "ft_fractol.h"
 
-static void	draw_fractal(t_param *param)
+void	draw_fractol(t_param *param)
 {
 	int		x;
 	int		y;
@@ -34,9 +34,4 @@ static void	draw_fractal(t_param *param)
 		y++;
 	}
 	mlx_put_image_to_window(param->mlx, param->win, param->data.img, 0, 0);
-}
-
-void	choose_fractal(t_param *param)
-{	
-	draw_fractal(param);
 }

@@ -6,11 +6,11 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:42:50 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/25 13:24:03 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:48:07 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_fractal.h"
+#include "ft_fractol.h"
 
 t_param	*calc_mandelbrot_set(t_param *param, int x, int y)
 {

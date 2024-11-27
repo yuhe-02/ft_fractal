@@ -6,11 +6,11 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 10:36:10 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/09/30 00:12:17 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:48:07 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_fractal.h"
+#include "ft_fractol.h"
 
 double	ft_cabs(t_complex z1)
 {

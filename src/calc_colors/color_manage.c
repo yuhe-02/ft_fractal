@@ -6,11 +6,11 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:39:33 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/26 15:57:19 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:12:17 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_fractal.h"
+#include "ft_fractol.h"
 
 double	abs_double(double val)
 {
@@ -59,9 +59,8 @@ uint32_t	hsv2hex(double h, double s, double v)
 
 int	get_colors(int iteration, int max_iter, t_param *param, int color_flg)
 {
-	int 	color;
+	int		color;
 	double	hue;
-    double	value;
 	double	ratio;
 
 	if (iteration == max_iter && color_flg)
@@ -72,14 +71,12 @@ int	get_colors(int iteration, int max_iter, t_param *param, int color_flg)
 	{
 		hue = iteration % 360;
 		ratio = (double)iteration / max_iter;
-		value = (double)iteration / max_iter;
 		if (color_flg)
 		{
 			hue = fmod(hue + 180.0, 360.0);
 			ratio = 1 - ratio;
-			value = ratio;
 		}
-		color = hsv2hex(hue, ratio, value);
+		color = hsv2hex(hue, ratio, ratio);
 	}
-    return color;
+	return (color);
 }

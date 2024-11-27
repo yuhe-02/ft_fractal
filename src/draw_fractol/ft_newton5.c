@@ -6,11 +6,11 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:43:22 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/26 15:06:55 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:13:29 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_fractal.h"
+#include "ft_fractol.h"
 
 static	t_complex	newton_method(t_complex z,
 									double power, double section)
@@ -49,7 +49,7 @@ static	t_complex	root_of_func(t_complex z,
 	return (z_new);
 }
 
-t_param *calc_newton5_set(t_param *param, int x, int y)
+t_param	*calc_newton5_set(t_param *param, int x, int y)
 {
 	int				iterations;
 	t_complex		z;
