@@ -6,13 +6,13 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:36:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/26 15:54:18 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:10:52 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_fractal.h"
+#include "ft_fractol.h"
 
-static void move_by_key(int keycode, t_param *param)
+static void	move_by_key(int keycode, t_param *param)
 {
 	if (keycode == KEY_UP)
 	{
@@ -43,15 +43,16 @@ int	key_hook(int keycode, void *data)
 	param = (t_param *)data;
 	if (keycode == KEY_ESC)
 		close_window(param);
-	else if (keycode == KEY_SHIFT) 
+	else if (keycode == KEY_SHIFT)
 		param->shift_flg = FT_TRUE;
-	else if (keycode == KEY_UP || keycode == KEY_DOWN || keycode == KEY_RIGHT || keycode == KEY_LEFT)
+	else if (keycode == KEY_UP || keycode == KEY_DOWN
+		|| keycode == KEY_RIGHT || keycode == KEY_LEFT)
 		move_by_key(keycode, param);
 	else if (keycode == KEY_ENTER)
 		param->color_flg = !param->color_flg;
 	else
 		return (0);
 	mlx_clear_window(param->mlx, param->win);
-	choose_fractal(param);
+	draw_fractol(param);
 	return (0);
 }

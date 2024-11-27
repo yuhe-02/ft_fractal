@@ -9,13 +9,13 @@
 ### インストール
 
 ```bash
-git clone https://github.com/yuhe-02/ft_fractal.git
-cd ft_fractal
+git clone https://github.com/yuhe-02/ft_fractol.git
+cd ft_fractol
 tar -xvpf minilibx-linux.tgz
 cd minilibx-linux && make && make clean
 cd ..
 make all && make clean
-./ft_fractal mandelbrot -0.63 -0.3
+./ft_fractol mandelbrot -0.63 -0.3
 ```
 
 ### requirement
