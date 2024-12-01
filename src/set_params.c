@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:51:02 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 19:11:25 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/01 19:54:05 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	set_shape_param(t_param *param, char **argv)
 	}
 	else
 	{
-		display_errorlog("ft_fractol: invalid nunber\n", FT_FALSE);
+		display_errorlog("fractol: invalid nunber\n", FT_FALSE);
 		return (FT_FALSE);
 	}
 	return (FT_TRUE);
