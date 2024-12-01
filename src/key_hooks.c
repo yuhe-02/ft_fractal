@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:36:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 14:59:45 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/01 19:06:00 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 static void	move_by_key(int keycode, t_param *param)
 {
-	if (keycode == KEY_UP)
+	if (keycode == KEY_DOWN)
 	{
 		param->min_im -= (param->max_im - param->min_im) * MOVE_MAG;
 		param->max_im -= (param->max_im - param->min_im) * MOVE_MAG;
 	}
-	if (keycode == KEY_DOWN)
+	if (keycode == KEY_UP)
 	{
 		param->min_im += (param->max_im - param->min_im) * MOVE_MAG;
 		param->max_im += (param->max_im - param->min_im) * MOVE_MAG;
 	}
-	if (keycode == KEY_RIGHT)
+	if (keycode == KEY_LEFT)
 	{
 		param->min_re += (param->max_re - param->min_re) * MOVE_MAG;
 		param->max_re += (param->max_re - param->min_re) * MOVE_MAG;
 	}
-	if (keycode == KEY_LEFT)
+	if (keycode == KEY_RIGHT)
 	{
 		param->min_re -= (param->max_re - param->min_re) * MOVE_MAG;
 		param->max_re -= (param->max_re - param->min_re) * MOVE_MAG;

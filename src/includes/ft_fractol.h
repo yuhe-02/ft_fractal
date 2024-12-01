@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 15:02:40 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/01 19:11:41 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ typedef enum e_mouses
 # define EPS 1e-10
 # define WINDOW_CLOSE 17
 # define SENTENCE1 "Below is sample valid parameters.\n"
-# define SENTENCE2 "./ft_fractol julia -0.3 -0.63\n"
-# define SENTENCE3 "./ft_fractol mandelbrot 0 0\n"
-# define SENTENCE4 "./ft_fractol newton 3 -2\n"
+# define SENTENCE2 "./fractol julia -0.3 -0.63\n"
+# define SENTENCE3 "./fractol mandelbrot\n"
+# define SENTENCE4 "./fractol newton 3 -2\n"
 
 typedef struct s_param	t_param;
 
@@ -95,6 +95,7 @@ typedef struct s_param
 	double				param2;
 	double				zoom;
 	int					space_flg;
+	int					shift_flg;
 	t_param				*(*calculator)(t_param*, int, int);
 	int					(*calc_color)(t_param*, int);
 }			t_param;
@@ -118,7 +119,7 @@ int			key_hook(int keycode, void *param);
 int			mouse_hook(int button, int x, int y, void *param);
 void		draw_fractol(t_param *img);
 void		put_mlx_pixel(t_param *data, int x, int y, int color);
-// void		update_fractol_c(t_param *param);
+void		update_fractol_c(t_param *param);
 int			close_window(t_param *data);
 
 // calc colors
