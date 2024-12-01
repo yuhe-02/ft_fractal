@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:36:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/27 14:07:05 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:20:55 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ static double	interpolate(double start, double end, double interpolation)
 	return (start + ((end - start) * interpolation));
 }
 
-static double	*get_mouse_pos(int x, int y, t_param *param)
+static double	*get_mouse_pos(int x, int y, t_param *param, double *mouse_pos)
 {
 	double	mouse_re;
 	double	mouse_im;
-	double	mouse_pos[2];
 
 	mouse_re = (double)x
 		/ (WIDTH / (param->max_re - param->min_re)) + param->min_re;
@@ -36,10 +35,10 @@ static void	move_by_zoom(int button, int x, int y, void *img)
 {
 	double	interpolation;
 	t_param	*param;
-	double	*mouse_pos;
+	double	mouse_pos[2];
 
 	param = (t_param *)img;
-	mouse_pos = get_mouse_pos(x, y, param);
+	get_mouse_pos(x, y, param, mouse_pos);
 	if (button == MOUSE_WHEEL_UP)
 	{
 		if (param->max_iter > 4)
@@ -57,30 +56,6 @@ static void	move_by_zoom(int button, int x, int y, void *img)
 	param->min_im = interpolate(mouse_pos[1], param->min_im, interpolation);
 	param->max_re = interpolate(mouse_pos[0], param->max_re, interpolation);
 	param->max_im = interpolate(mouse_pos[1], param->max_im, interpolation);
-}
-
-static void	move_by_key(int keycode, t_param *param)
-{
-	if (keycode == KEY_UP)
-	{
-		param->min_im -= (param->max_im - param->min_im) * MOVE_MAG;
-		param->max_im -= (param->max_im - param->min_im) * MOVE_MAG;
-	}
-	if (keycode == KEY_DOWN)
-	{
-		param->min_im += (param->max_im - param->min_im) * MOVE_MAG;
-		param->max_im += (param->max_im - param->min_im) * MOVE_MAG;
-	}
-	if (keycode == KEY_RIGHT)
-	{
-		param->min_re += (param->max_re - param->min_re) * MOVE_MAG;
-		param->max_re += (param->max_re - param->min_re) * MOVE_MAG;
-	}
-	if (keycode == KEY_LEFT)
-	{
-		param->min_re -= (param->max_re - param->min_re) * MOVE_MAG;
-		param->max_re -= (param->max_re - param->min_re) * MOVE_MAG;
-	}
 }
 
 int	mouse_hook(int button, int x, int y, void *data)

@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:27:18 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/27 14:05:09 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:45:10 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	set_hooks(t_param *param)
 
 int	main_loop(t_param *param)
 {
-	if (param->shift_flg)
-		update_fractol_c(param);
+	// if (param->shift_flg)
+	// 	update_fractol_c(param);
 	draw_fractol(param);
 	return (0);
 }
@@ -30,13 +30,12 @@ int	main_loop(t_param *param)
 int	main(int argc, char **argv)
 {
 	t_param	param;
-	t_data	img;
 
 	if (!check_params(argc, argv))
 		return (1);
-	if (!set_shape_param(&param, argc, argv))
+	if (!set_shape_param(&param, argv))
 		return (1);
-	initialize_param(&param, argc, argv);
+	initialize_param(&param);
 	draw_fractol(&param);
 	set_hooks(&param);
 	mlx_loop_hook(param.mlx, &main_loop, &param);

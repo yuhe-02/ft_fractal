@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:23:27 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/27 14:06:44 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:41:35 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_fractol(t_param *param)
 		while (x < WIDTH)
 		{
 			param = param->calculator(param, x, y);
-			color = param->calc_color(param, param->color_flg);
+			color = param->calc_color(param, param->shift_flg);
 			put_mlx_pixel(param, x, y, color);
 			x++;
 		}

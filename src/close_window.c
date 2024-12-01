@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:31:09 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/27 14:07:49 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:45:00 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@ int	close_window(t_param *param)
 	return (0);
 }
 
-void	update_fractol_c(t_param *param)
-{
-	int		x;
-	int		y;
-	double	mouse_re;
-	double	mouse_im;
+// void	update_fractol_c(t_param *param)
+// {
+// 	int		x;
+// 	int		y;
+// 	double	mouse_re;
+// 	double	mouse_im;
 
-	mlx_mouse_get_pos(param->mlx, param->win, &x, &y);
-	if (!x && !y)
-		return ;
-	mouse_re = (double)x
-		/ (WIDTH / (param->max_re - param->min_re)) + param->min_re;
-	mouse_im = (double)y
-		/ (HEIGHT / (param->max_im - param->min_im)) * -1 + param->max_im;
-	param->c_re = mouse_re;
-	param->c_im = mouse_im;
-}
+// 	mlx_mouse_get_pos(param->mlx, param->win, &x, &y);
+// 	if (!x && !y)
+// 		return ;
+// 	mouse_re = (double)x
+// 		/ (WIDTH / (param->max_re - param->min_re)) + param->min_re;
+// 	mouse_im = (double)y
+// 		/ (HEIGHT / (param->max_im - param->min_im)) * -1 + param->max_im;
+// 	param->c_re = mouse_re;
+// 	param->c_im = mouse_im;
+// }

@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 00:01:36 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/27 14:13:15 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:25:22 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int	calc_color1(t_param *param, int color_flg)
 		param->z_re = tmp;
 		i++;
 	}
-	color = get_colors(i, param->max_iter, param, color_flg);
+	color = get_colors(i, param->max_iter, color_flg);
 	return (color);
 }
