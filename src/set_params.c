@@ -6,15 +6,17 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:51:02 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/27 14:10:07 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/01 20:08:52 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fractol.h"
 
-int	set_shape_param(t_param *param, int argc, char **argv)
+int	set_shape_param(t_param *param, char **argv)
 {
 	param->calc_color = calc_color1;
+	param->param1 = 0;
+	param->param2 = 0;
 	if (ft_strncmp(argv[1], JULIA_S, ft_strlen(JULIA_S) + 1) == 0)
 		param->calculator = calc_julia_set;
 	else if (ft_strncmp(argv[1], MD_S, ft_strlen(MD_S) + 1) == 0)
@@ -26,27 +28,31 @@ int	set_shape_param(t_param *param, int argc, char **argv)
 	}
 	else
 	{
-		display_errorlog("ft_fractol: invalid nunber\n", FT_FALSE);
+		display_errorlog("fractol: invalid nunber\n", FT_FALSE);
 		return (FT_FALSE);
 	}
-	param->param1 = ft_atob(argv[2]);
-	param->param2 = ft_atob(argv[3]);
+	if (ft_strncmp(argv[1], MD_S, ft_strlen(MD_S) + 1) != 0)
+	{
+		param->param1 = ft_atob(argv[2]);
+		param->param2 = ft_atob(argv[3]);
+	}
 	return (FT_TRUE);
 }
 
-void	init_images(t_param *param, int argc, char **argv)
+void	init_images(t_param *param)
 {
 	param->max_re = 2;
 	param->max_im = 2;
 	param->min_re = -2;
 	param->min_im = -2;
 	param->max_iter = MAX_ITER;
-	param->color_flg = 0;
+	param->space_flg = FT_FALSE;
+	param->shift_flg = FT_FALSE;
 	param->data.addr = mlx_get_data_addr(param->data.img, &(param->data.bpp),
 			&(param->data.llen), &(param->data.eda));
 }
 
-void	initialize_param(t_param *param, int argc, char **argv)
+void	initialize_param(t_param *param)
 {
 	param->mlx = mlx_init();
 	if (!param->mlx)
@@ -61,5 +67,5 @@ void	initialize_param(t_param *param, int argc, char **argv)
 	param->data.addr = mlx_get_data_addr(param->data.img,
 			&param->data.bpp,
 			&param->data.llen, &param->data.eda);
-	init_images(param, argc, argv);
+	init_images(param);
 }

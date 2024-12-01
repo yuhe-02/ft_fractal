@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:39:33 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/27 14:12:17 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:25:01 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ uint32_t	hsv2hex(double h, double s, double v)
 		return (rgb2hex((0 + m) * 255, (0 + m) * 255, (0 + m) * 255));
 }
 
-int	get_colors(int iteration, int max_iter, t_param *param, int color_flg)
+int	get_colors(int iteration, int max_iter, int color_flg)
 {
 	int		color;
 	double	hue;

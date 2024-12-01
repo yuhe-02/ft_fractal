@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/27 14:17:22 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/01 19:11:41 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_FRACTOL_H
 
 # include "mlx.h"
-# include <stdio.h>
 # include <stdlib.h>
 # include <X11/X.h>
 # include <X11/Xlib.h>
@@ -46,8 +45,8 @@ typedef enum e_mouses
 # define JULIA_S "julia"
 # define MD_S "mandelbrot"
 # define BONUS_S "newton"
-# define WIDTH 400
-# define HEIGHT 400
+# define WIDTH 800
+# define HEIGHT 800
 # define FT_TRUE 1
 # define FT_FALSE 0
 # define ZOOM_MAG 1.2
@@ -56,9 +55,9 @@ typedef enum e_mouses
 # define EPS 1e-10
 # define WINDOW_CLOSE 17
 # define SENTENCE1 "Below is sample valid parameters.\n"
-# define SENTENCE2 "./ft_fractol julia -0.3 -0.63\n"
-# define SENTENCE3 "./ft_fractol mandelbrot 0 0\n"
-# define SENTENCE4 "./ft_fractol newton 3 -2\n"
+# define SENTENCE2 "./fractol julia -0.3 -0.63\n"
+# define SENTENCE3 "./fractol mandelbrot\n"
+# define SENTENCE4 "./fractol newton 3 -2\n"
 
 typedef struct s_param	t_param;
 
@@ -95,7 +94,7 @@ typedef struct s_param
 	double				param1;
 	double				param2;
 	double				zoom;
-	int					color_flg;
+	int					space_flg;
 	int					shift_flg;
 	t_param				*(*calculator)(t_param*, int, int);
 	int					(*calc_color)(t_param*, int);
@@ -111,9 +110,9 @@ typedef struct s_complex
 int			ft_is_valid_num(const char *str);
 int			validate_params(char **argv, int param_num, int start_index);
 int			check_params(int ac, char **av);
-void		init_images(t_param *img, int argc, char **argv);
-void		initialize_param(t_param *param, int argc, char **argv);
-int			set_shape_param(t_param *param, int argc, char **argv);
+void		init_images(t_param *img);
+void		initialize_param(t_param *param);
+int			set_shape_param(t_param *param, char **argv);
 void		set_error(char *message, int is_put_sample, int exit_no);
 void		display_errorlog(char *message, int is_put_sample);
 int			key_hook(int keycode, void *param);
@@ -131,8 +130,7 @@ int			calc_color2(t_param *cd, int color_flg);
 int			calc_color1(t_param *cd, int color_flg);
 uint32_t	rgb2hex(int r, int g, int b);
 uint32_t	hsv2hex(double h, double s, double v);
-int			get_colors(int iteration, int max_iter,
-				t_param *param, int color_flg);
+int			get_colors(int iteration, int max_iter, int color_flg);
 void		draw_fractol(t_param *param);
 
 // util
