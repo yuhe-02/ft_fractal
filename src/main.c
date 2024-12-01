@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:27:18 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 14:45:10 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:49:44 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ static void	set_hooks(t_param *param)
 
 int	main_loop(t_param *param)
 {
-	// if (param->shift_flg)
-	// 	update_fractol_c(param);
 	draw_fractol(param);
 	return (0);
 }
