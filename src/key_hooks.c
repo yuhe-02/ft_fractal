@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:36:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 14:43:29 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:59:45 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	key_hook(int keycode, void *data)
 	param = (t_param *)data;
 	if (keycode == KEY_ESC)
 		close_window(param);
-	else if (keycode == KEY_SHIFT)
-		param->shift_flg = FT_TRUE;
+	else if (keycode == KEY_SPACE)
+		param->space_flg = !param->space_flg;
 	else if (keycode == KEY_UP || keycode == KEY_DOWN
 		|| keycode == KEY_RIGHT || keycode == KEY_LEFT)
 		move_by_key(keycode, param);

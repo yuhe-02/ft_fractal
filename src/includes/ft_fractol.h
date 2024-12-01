@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 14:45:15 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/01 15:02:40 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct s_param
 	double				param1;
 	double				param2;
 	double				zoom;
-	int					shift_flg;
+	int					space_flg;
 	t_param				*(*calculator)(t_param*, int, int);
 	int					(*calc_color)(t_param*, int);
 }			t_param;
