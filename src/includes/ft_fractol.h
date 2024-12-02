@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 19:11:41 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:18:22 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef enum e_mouses
 # define FT_FALSE 0
 # define ZOOM_MAG 1.2
 # define MOVE_MAG 0.05
-# define MAX_ITER 100
+# define MAX_ITER 200
 # define EPS 1e-10
 # define WINDOW_CLOSE 17
 # define SENTENCE1 "Below is sample valid parameters.\n"
@@ -89,13 +89,13 @@ typedef struct s_param
 	double				c_re;
 	double				c_im;
 	int					iteration;
+	long				cur_iter;
 	double				delta_re;
 	double				delta_im;
 	double				param1;
 	double				param2;
 	double				zoom;
 	int					space_flg;
-	int					shift_flg;
 	t_param				*(*calculator)(t_param*, int, int);
 	int					(*calc_color)(t_param*, int);
 }			t_param;
@@ -145,6 +145,7 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 size_t		ft_strlcpy(char *dest, char const *src, size_t n);
 char		*ft_delete_space(const char *str);
 double		abs_double(double val);
+void		ft_bzero(void *s, size_t n);
 
 // math
 t_complex	ft_cpow(t_complex z, double power);

@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:43:22 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/27 14:13:29 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:18:18 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ static	t_complex	newton_method(t_complex z,
 }
 
 static	t_complex	root_of_func(t_complex z,
-								int *iterations, double power, double section)
+								int *iterations, t_param *param)
 {
 	int				counter;
 	t_complex		z_new;
 	double			eps;
 
 	counter = 0;
-	while (counter < MAX_ITER)
+	while (counter < param->cur_iter)
 	{
-		z_new = newton_method(z, power, section);
+		z_new = newton_method(z, param->param1, param->param2);
 		eps = ft_cabs(ft_complex_diff(z_new, z));
 		if (eps < EPS)
 			break ;
@@ -57,7 +57,7 @@ t_param	*calc_newton5_set(t_param *param, int x, int y)
 
 	z.imag = param->min_im + y * param->delta_im;
 	z.real = param->min_re + x * param->delta_re;
-	root = root_of_func(z, &iterations, param->param1, param->param2);
+	root = root_of_func(z, &iterations, param);
 	param->c_re = z.real;
 	param->c_im = z.imag;
 	param->z_re = root.real;

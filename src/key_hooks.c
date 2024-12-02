@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:36:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 19:06:00 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:18:05 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	key_hook(int keycode, void *data)
 		move_by_key(keycode, param);
 	else
 		return (0);
-	mlx_clear_window(param->mlx, param->win);
-	draw_fractol(param);
+	param->cur_iter = param->max_iter / 2;
+	ft_bzero(param->data.addr, param->data.llen * HEIGHT);
 	return (0);
 }
