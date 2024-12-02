@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:51:02 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 20:08:52 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:18:25 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	init_images(t_param *param)
 	param->min_im = -2;
 	param->max_iter = MAX_ITER;
 	param->space_flg = FT_FALSE;
-	param->shift_flg = FT_FALSE;
+	param->iteration = 0;
+	param->cur_iter = MAX_ITER / 2;
 	param->data.addr = mlx_get_data_addr(param->data.img, &(param->data.bpp),
 			&(param->data.llen), &(param->data.eda));
 }

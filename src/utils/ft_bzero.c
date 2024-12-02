@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_color2.c                                      :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 00:02:24 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 16:32:18 by yyamasak         ###   ########.fr       */
+/*   Created: 2024/04/15 23:40:01 by yyamasak          #+#    #+#             */
+/*   Updated: 2024/12/02 14:20:26 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fractol.h"
 
-int	calc_color2(t_param *param, int color_flg)
+void	ft_bzero(void *s, size_t n)
 {
-	return (get_colors(param->iteration, param->cur_iter, color_flg));
+	char	*str;
+	size_t	i;
+
+	str = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		str[i] = 0;
+		i++;
+	}
 }

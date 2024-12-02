@@ -1,13 +1,13 @@
 NAME=fractol
 CFLAGS=-Wall -Wextra -Werror
-CC = gcc
+CC= cc
 
 COLORS= src/calc_colors/calc_color1.c src/calc_colors/calc_color2.c src/calc_colors/color_manage.c
 DRAWER= src/draw_fractol/ft_julia.c src/draw_fractol/ft_mandel.c src/draw_fractol/ft_newton5.c
 UTILS= src/utils/ft_strncmp.c src/utils/ft_atob.c src/utils/ft_is_valid_num.c \
        src/utils/ft_strlen.c src/utils/ft_strrchr.c src/utils/ft_strchr.c \
        src/utils/ft_substr.c src/utils/ft_delete_space.c src/utils/ft_is_num.c \
-       src/utils/ft_strlcpy.c src/utils/ft_isspace.c \
+       src/utils/ft_strlcpy.c src/utils/ft_isspace.c src/utils/ft_bzero.c \
        src/set_error.c src/utils/ft_put_pixel.c src/utils/validate_params.c
 MATH=  src/math/ft_cabs.c src/math/ft_cpow.c src/math/ft_complex_diff.c \
        src/math/ft_complex_div.c src/math/ft_complex_add.c src/math/ft_complex_mul.c \

@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:39:33 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 14:25:01 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:15:03 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int	get_colors(int iteration, int max_iter, int color_flg)
 	double	hue;
 	double	ratio;
 
-	if (iteration == max_iter && color_flg)
+	if (iteration == max_iter && !color_flg)
 		color = rgb2hex(255, 255, 255);
-	else if (iteration == max_iter && !color_flg)
+	else if (iteration == max_iter && color_flg)
 		color = rgb2hex(0, 0, 0);
 	else
 	{
