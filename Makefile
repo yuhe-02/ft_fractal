@@ -14,7 +14,6 @@ MAIN= src/main.c
 SRCS+=$(COLORS)
 SRCS+=$(DRAWER)
 SRCS+=$(UTILS)
-SRCS+=$(MATH)
 SRCS+=$(MAIN)
 OBJS=$(SRCS:.c=.o)
 
