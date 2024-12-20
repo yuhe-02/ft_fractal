@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:50:20 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 20:04:53 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:59:54 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,15 @@ int	validate_params(char **argv, int param_num, int start_index)
 
 int	check_params(int ac, char **av)
 {
-	if (ac <= 1)
+	if (ac == 4 && ft_strncmp(av[1], JULIA_S, ft_strlen(JULIA_S) + 1) == 0)
 	{
-		display_errorlog("", FT_TRUE);
-		return (FT_FALSE);
+		if (validate_params(av, 4, 2))
+			return (FT_TRUE);
 	}
-	if (ft_strncmp(av[1], MD_S, ft_strlen(MD_S) + 1) == 0 && ac != 2)
-	{
-		display_errorlog("", FT_TRUE);
-		return (FT_FALSE);
-	}
-	else if (ft_strncmp(av[1], MD_S, ft_strlen(MD_S) + 1) == 0)
+	else if (ac == 2 && ft_strncmp(av[1], MD_S, ft_strlen(MD_S) + 1) == 0)
 		return (FT_TRUE);
-	if (ac != 4)
-	{
-		display_errorlog("", FT_TRUE);
-		return (FT_FALSE);
-	}
-	else if (!validate_params(av, 4, 2))
-	{
-		display_errorlog("fractol: invalid parameter\n", FT_TRUE);
-		return (FT_FALSE);
-	}
-	return (FT_TRUE);
+	else if (ac == 2 && ft_strncmp(av[1], BONUS_S, ft_strlen(BONUS_S) + 1) == 0)
+		return (FT_TRUE);
+	display_errorlog("fractol: invalid parameter\n", FT_TRUE);
+	return (FT_FALSE);
 }

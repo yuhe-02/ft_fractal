@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:51:02 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 20:08:52 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:01:57 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,17 @@ int	set_shape_param(t_param *param, char **argv)
 	param->param1 = 0;
 	param->param2 = 0;
 	if (ft_strncmp(argv[1], JULIA_S, ft_strlen(JULIA_S) + 1) == 0)
+	{
 		param->calculator = calc_julia_set;
+		param->param1 = ft_atob(argv[2]);
+		param->param2 = ft_atob(argv[3]);
+	}
 	else if (ft_strncmp(argv[1], MD_S, ft_strlen(MD_S) + 1) == 0)
 		param->calculator = calc_mandelbrot_set;
 	else if (ft_strncmp(argv[1], BONUS_S, ft_strlen(BONUS_S) + 1) == 0)
 	{
-		param->calculator = calc_newton5_set;
+		param->calculator = calc_burningship_set;
 		param->calc_color = calc_color2;
-	}
-	else
-	{
-		display_errorlog("fractol: invalid nunber\n", FT_FALSE);
-		return (FT_FALSE);
-	}
-	if (ft_strncmp(argv[1], MD_S, ft_strlen(MD_S) + 1) != 0)
-	{
-		param->param1 = ft_atob(argv[2]);
-		param->param2 = ft_atob(argv[3]);
 	}
 	return (FT_TRUE);
 }
@@ -47,7 +41,8 @@ void	init_images(t_param *param)
 	param->min_im = -2;
 	param->max_iter = MAX_ITER;
 	param->space_flg = FT_FALSE;
-	param->shift_flg = FT_FALSE;
+	param->iteration = 0;
+	param->cur_iter = MAX_ITER / 2;
 	param->data.addr = mlx_get_data_addr(param->data.img, &(param->data.bpp),
 			&(param->data.llen), &(param->data.eda));
 }

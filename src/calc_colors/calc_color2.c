@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 00:02:24 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 14:25:19 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:48:40 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,26 @@
 
 int	calc_color2(t_param *param, int color_flg)
 {
-	return (get_colors(param->iteration, param->max_iter, color_flg));
+	int		color;
+	double	tmp;
+	int		i;
+
+	i = 0;
+	while (param->z_re * param->z_re + param->z_im * param->z_im <= 4
+		&& i < param->cur_iter)
+	{
+		tmp = param->z_re * param->z_re
+			- param->z_im * param->z_im + param->c_re;
+		param->z_im = abs_double(2 * param->z_re * param->z_im)
+			+ param->c_im;
+		param->z_re = tmp;
+		i++;
+	}
+	color = get_colors(i, param->cur_iter, color_flg);
+	return (color);
 }
+
+// int	calc_color2(t_param *param, int color_flg)
+// {
+// 	return (get_colors(param->iteration, param->cur_iter, color_flg));
+// }

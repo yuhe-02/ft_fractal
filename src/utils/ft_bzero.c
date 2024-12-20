@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_complex_mul.c                                   :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 10:40:40 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/11/27 13:48:07 by yyamasak         ###   ########.fr       */
+/*   Created: 2024/04/15 23:40:01 by yyamasak          #+#    #+#             */
+/*   Updated: 2024/12/02 14:20:26 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fractol.h"
 
-t_complex	ft_complex_mul(t_complex z1, t_complex z2)
+void	ft_bzero(void *s, size_t n)
 {
-	t_complex	z;
+	char	*str;
+	size_t	i;
 
-	z.real = z1.real * z2.real - z1.imag * z2.imag;
-	z.imag = z1.imag * z2.real + z1.real * z2.imag;
-	return (z);
+	str = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		str[i] = 0;
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:49:48 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 19:11:41 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:03:59 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,20 @@ typedef enum e_mouses
 
 # define JULIA_S "julia"
 # define MD_S "mandelbrot"
-# define BONUS_S "newton"
+# define BONUS_S "burningship"
 # define WIDTH 800
 # define HEIGHT 800
 # define FT_TRUE 1
 # define FT_FALSE 0
 # define ZOOM_MAG 1.2
 # define MOVE_MAG 0.05
-# define MAX_ITER 100
+# define MAX_ITER 200
 # define EPS 1e-10
 # define WINDOW_CLOSE 17
 # define SENTENCE1 "Below is sample valid parameters.\n"
 # define SENTENCE2 "./fractol julia -0.3 -0.63\n"
 # define SENTENCE3 "./fractol mandelbrot\n"
-# define SENTENCE4 "./fractol newton 3 -2\n"
+# define SENTENCE4 "./fractol burningship\n"
 
 typedef struct s_param	t_param;
 
@@ -89,13 +89,13 @@ typedef struct s_param
 	double				c_re;
 	double				c_im;
 	int					iteration;
+	long				cur_iter;
 	double				delta_re;
 	double				delta_im;
 	double				param1;
 	double				param2;
 	double				zoom;
 	int					space_flg;
-	int					shift_flg;
 	t_param				*(*calculator)(t_param*, int, int);
 	int					(*calc_color)(t_param*, int);
 }			t_param;
@@ -125,7 +125,7 @@ int			close_window(t_param *data);
 // calc colors
 t_param		*calc_mandelbrot_set(t_param *img, int x, int y);
 t_param		*calc_julia_set(t_param *img, int x, int y);
-t_param		*calc_newton5_set(t_param *img, int x, int y);
+t_param		*calc_burningship_set(t_param *param, int x, int y);
 int			calc_color2(t_param *cd, int color_flg);
 int			calc_color1(t_param *cd, int color_flg);
 uint32_t	rgb2hex(int r, int g, int b);
@@ -145,13 +145,5 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 size_t		ft_strlcpy(char *dest, char const *src, size_t n);
 char		*ft_delete_space(const char *str);
 double		abs_double(double val);
-
-// math
-t_complex	ft_cpow(t_complex z, double power);
-double		ft_cabs(t_complex z1);
-t_complex	ft_complex_diff(t_complex z1, t_complex z2);
-t_complex	ft_complex_add(t_complex z1, t_complex z2);
-t_complex	ft_complex_div(t_complex z1, t_complex z2);
-t_complex	ft_complex_mul(t_complex z1, t_complex z2);
-t_complex	ft_complex_mul_st(t_complex z1, double st_value);
+void		ft_bzero(void *s, size_t n);
 #endif

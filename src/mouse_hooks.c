@@ -6,7 +6,7 @@
 /*   By: yyamasak <yyamasak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 23:36:51 by yyamasak          #+#    #+#             */
-/*   Updated: 2024/12/01 14:20:55 by yyamasak         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:18:09 by yyamasak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int	mouse_hook(int button, int x, int y, void *data)
 	if (button == MOUSE_WHEEL_UP || button == MOUSE_WHEEL_DOWN)
 	{
 		move_by_zoom(button, x, y, param);
-		mlx_clear_window(param->mlx, param->win);
-		draw_fractol(param);
+		ft_bzero(param->data.addr, param->data.llen * HEIGHT);
 	}
+	param->cur_iter = param->max_iter / 2;
 	return (0);
 }
